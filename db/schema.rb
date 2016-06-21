@@ -11,10 +11,65 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160621083721) do
+ActiveRecord::Schema.define(version: 20160621090326) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "players", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.integer  "licence"
+    t.integer  "credit"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "registrations", force: :cascade do |t|
+    t.integer  "player_id"
+    t.integer  "tournament_id"
+    t.string   "tableau1"
+    t.string   "serie1"
+    t.string   "tableau2"
+    t.string   "serie2"
+    t.string   "tableau3"
+    t.string   "serie3"
+    t.integer  "price"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "registrations", ["player_id"], name: "index_registrations_on_player_id", using: :btree
+  add_index "registrations", ["tournament_id"], name: "index_registrations_on_tournament_id", using: :btree
+
+  create_table "tournaments", force: :cascade do |t|
+    t.string   "city"
+    t.string   "date"
+    t.boolean  "n1"
+    t.boolean  "n2"
+    t.boolean  "n3"
+    t.boolean  "r4"
+    t.boolean  "r5"
+    t.boolean  "r6"
+    t.boolean  "d7"
+    t.boolean  "d8"
+    t.boolean  "d9"
+    t.boolean  "p1"
+    t.boolean  "p2"
+    t.boolean  "p3"
+    t.boolean  "sh"
+    t.boolean  "sd"
+    t.boolean  "dh"
+    t.boolean  "dd"
+    t.boolean  "dm"
+    t.integer  "price1"
+    t.integer  "price2"
+    t.integer  "price3"
+    t.boolean  "club"
+    t.string   "convocations"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -34,4 +89,6 @@ ActiveRecord::Schema.define(version: 20160621083721) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "registrations", "players"
+  add_foreign_key "registrations", "tournaments"
 end
