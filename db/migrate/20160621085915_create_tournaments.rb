@@ -15,8 +15,6 @@ class CreateTournaments < ActiveRecord::Migration
       t.boolean :p1
       t.boolean :p2
       t.boolean :p3
-      t.boolean :sh
-      t.boolean :sd
       t.boolean :dh
       t.boolean :dd
       t.boolean :dm
