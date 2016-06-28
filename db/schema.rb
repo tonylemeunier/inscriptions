@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160621090326) do
+ActiveRecord::Schema.define(version: 20160622090800) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,23 +45,6 @@ ActiveRecord::Schema.define(version: 20160621090326) do
   create_table "tournaments", force: :cascade do |t|
     t.string   "city"
     t.string   "date"
-    t.boolean  "n1"
-    t.boolean  "n2"
-    t.boolean  "n3"
-    t.boolean  "r4"
-    t.boolean  "r5"
-    t.boolean  "r6"
-    t.boolean  "d7"
-    t.boolean  "d8"
-    t.boolean  "d9"
-    t.boolean  "p1"
-    t.boolean  "p2"
-    t.boolean  "p3"
-    t.boolean  "sh"
-    t.boolean  "sd"
-    t.boolean  "dh"
-    t.boolean  "dd"
-    t.boolean  "dm"
     t.integer  "price1"
     t.integer  "price2"
     t.integer  "price3"
@@ -69,6 +52,8 @@ ActiveRecord::Schema.define(version: 20160621090326) do
     t.string   "convocations"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.string   "serie"
+    t.string   "tableau"
   end
 
   create_table "users", force: :cascade do |t|
