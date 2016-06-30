@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="text-center">
+    <h2>Tous les tournois</h2>
+  </div>
+  <table class="table table-striped">
+    <tr>
+      <th>Date</th>
+      <th>Ville</th>
+      <th>Tableau</th>
+      <th>Série</th>
+      <th>1 tableau</th>
+      <th>2 tableaux</th>
+      <th>3 tableaux</th>
+    </tr>
+    <% @tournaments.each do |tournament| %>
+      <tr>
+        <td><%= tournament.date %></td>
+        <td><%= tournament.city %></td>
+        <td><%= tournament.tableau %></td>
+        <td><%= tournament.serie %></td>
+        <td><%= tournament.price1 %></td>
+        <td><%= tournament.price2 %></td>
+        <td><%= tournament.price3 %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
