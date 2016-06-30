@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="text-center">
+    <h2>Modifier le crédit d'un joueur</h2>
+  </div>
+  <div class="row">
+    <div class="row col-xs-12 col-sm-6 col-sm-offset-3">
+      <div class="form_new">
+        <p><%= @player.first_name %> <%= @player.last_name %> : <%= @player.credit %></p>
+        <%= form_tag(player_path, method: :patch) do %>
+          <%= text_field_tag :credit_sup %>
+          <%= submit_tag 'Ajouter', class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
