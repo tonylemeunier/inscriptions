@@ -14,6 +14,7 @@ class TournamentsController < ApplicationController
 
   def create
     @tournament = Tournament.new(tournament_params)
+    redirect_to tournaments_path
   end
 
   def edit
@@ -36,6 +37,6 @@ class TournamentsController < ApplicationController
   end
 
   def tournament_params
-    params.require(:tournament).permit(:city, :date, :tableau, :serie, :price1, :price2, :price3, :club)
+    params.require(:tournament).permit(:city, :date, :tableau, :serie, :price1, :price2, :price3)
   end
 end
