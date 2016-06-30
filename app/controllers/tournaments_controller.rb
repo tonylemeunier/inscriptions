@@ -14,6 +14,7 @@ class TournamentsController < ApplicationController
 
   def create
     @tournament = Tournament.new(tournament_params)
+    @tournament.save
     redirect_to tournaments_path
   end
 
