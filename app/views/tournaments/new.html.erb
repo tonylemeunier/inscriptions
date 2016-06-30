@@ -7,7 +7,7 @@
       <div class="form_new">
         <%= simple_form_for @tournament do |i| %>
           <%= i.input :city, label: "Ville" %>
-          <%= i.input :date %>
+          <%= i.input :date, as: :date, html5: true %>
           <%= i.input :serie %>
           <%= i.input :tableau %>
       </div>
