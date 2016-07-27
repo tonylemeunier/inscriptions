@@ -7,7 +7,9 @@ class RegistrationsController < ApplicationController
   end
 
   def new
+    @tournament = Tournament.where(id: :tournament_id)
     @registration = Registration.new
+
   end
 
   def create
@@ -38,12 +40,3 @@ class RegistrationsController < ApplicationController
   end
 end
 
-t.integer  "player_id"
-    t.integer  "tournament_id"
-    t.string   "tableau1"
-    t.string   "serie1"
-    t.string   "tableau2"
-    t.string   "serie2"
-    t.string   "tableau3"
-    t.string   "serie3"
-    t.integer  "price"
