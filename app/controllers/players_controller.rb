@@ -10,13 +10,14 @@ class PlayersController < ApplicationController
   end
 
   def new
+    @players = Player.order(:last_name)
     @player = Player.new
   end
 
   def create
     @player = Player.new(player_params)
     @player.save
-    redirect_to players_path
+    redirect_to new_player_path
   end
 
   def edit
@@ -27,7 +28,7 @@ class PlayersController < ApplicationController
     credit_sup = params["credit_sup"].to_i
     new_credit = credit + credit_sup
     @player.update(:credit => new_credit)
-    redirect_to players_path
+    redirect_to new_player_path
   end
 
   def delete
