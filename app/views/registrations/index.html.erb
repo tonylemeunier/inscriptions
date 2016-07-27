@@ -1,0 +1,5 @@
+<div class="container">
+  <% @registrations.each do |registration| %>
+    <%= registration.player_id, registration.tournament_id %>
+  <% end %>
+</div>

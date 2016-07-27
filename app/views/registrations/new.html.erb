@@ -1,3 +1,56 @@
+<div class="container text-center">
+  <h2>Inscription à un tournoi</h2>
+</div>
 <div class="container">
-  Inscription à un tournoi
+  <table class="table table-striped">
+    <tr>
+      <th>Date</th>
+      <th>Ville</th>
+      <th>Tableau</th>
+      <th>Série</th>
+      <th>1 tableau</th>
+      <th>2 tableaux</th>
+      <th>3 tableaux</th>
+    </tr>
+    <tr>
+      <td><%= @tournament.date %></td>
+      <td><%= @tournament.city %></td>
+      <td><%= @tournament.tableau %></td>
+      <td><%= @tournament.serie %></td>
+      <td><%= @tournament.price1 %></td>
+      <td><%= @tournament.price2 %></td>
+      <td><%= @tournament.price3 %></td>
+    </tr>
+  </table>
+</div>
+
+<div class="container">
+  <%= simple_form_for [@tournament, @registration] do |i| %>
+  <div class="row">
+    <div class="col-xs-12 col-sm-6">
+      <%= i.input :tournament_id, as: :hidden %>
+      <%= i.input :player_id, label: "Joueur", collection: @all_players %>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+      <%= i.input :price, label: "Montant de l'inscription" %>
+    </div>
+  </div>
+  <div class="row"></div>
+    <div class="col-xs-12 col-sm-4">
+      <%= i.input :tableau1, label: "1er Tableau" %>
+      <%= i.input :serie1, label: "Série" %>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+      <%= i.input :tableau2, label: "2ème Tableau" %>
+      <%= i.input :serie2, label: "Série" %>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+      <%= i.input :tableau3, label: "3ème Tableau" %>
+      <%= i.input :serie3, label: "Série" %>
+    </div>
+    <div class="row text-center">
+      <%= i.button :submit, "M'inscrire" %>
+    </div>
+
+  <% end %>
 </div>
