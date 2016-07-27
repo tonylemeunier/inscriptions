@@ -8,11 +8,7 @@ class RegistrationsController < ApplicationController
 
   def new
     @tournament = Tournament.where(id: params["tournament_id"]).first
-    @players = Player.order(:last_name).pluck(:first_name, :last_name, :credit, :id)
-    @all_players = []
-    @players.each do |player|
-      @all_players << [player.first(3).join(" "), player.last]
-    end
+    @all_players = Player.name_with_credit
     @registration = Registration.new
 
 

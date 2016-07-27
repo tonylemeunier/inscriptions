@@ -28,7 +28,7 @@
   <%= simple_form_for [@tournament, @registration] do |i| %>
   <div class="row">
     <div class="col-xs-12 col-sm-6">
-      <%= i.input :tournament_id, as: :hidden %>
+      <%= i.input :tournament_id, as: :hidden, input_html: {value: @tournament.id} %>
       <%= i.input :player_id, label: "Joueur", collection: @all_players %>
     </div>
     <div class="col-xs-12 col-sm-6">
