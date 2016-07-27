@@ -42,8 +42,10 @@
         <td><%= player.licence %></td>
         <td><%= player.credit %></td>
         <td>
-          <%= link_to edit_player_path(player) do %>
-            <i class="fa fa-pencil" aria-hidden="true"></i>
+          <% if current_user %>
+            <%= link_to edit_player_path(player) do %>
+              <i class="fa fa-pencil" aria-hidden="true"></i>
+            <% end %>
           <% end %>
         </td>
       </tr>
