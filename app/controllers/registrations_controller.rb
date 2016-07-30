@@ -1,6 +1,6 @@
 class RegistrationsController < ApplicationController
   def index
-    @registrations = Registration.all
+    @registrations = Registration.joins(:tournament).joins(:player).order(:tournament_id)
   end
 
   def show
