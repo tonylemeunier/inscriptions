@@ -13,7 +13,7 @@
       <th>3 tableaux</th>
     </tr>
     <tr>
-      <td><%= @tournament.date %></td>
+      <td><%= @tournament.date.strftime("%a %m %B %Y") %></td>
       <td><%= @tournament.city %></td>
       <td><%= @tournament.tableau %></td>
       <td><%= @tournament.serie %></td>
@@ -37,15 +37,15 @@
   </div>
   <div class="row"></div>
     <div class="col-xs-12 col-sm-4">
-      <%= i.input :tableau1, label: "1er Tableau" %>
+      <%= i.input :tableau1, label: "1er Tableau", collection: TABLEAUX %>
       <%= i.input :serie1, label: "Série" %>
     </div>
     <div class="col-xs-12 col-sm-4">
-      <%= i.input :tableau2, label: "2ème Tableau" %>
+      <%= i.input :tableau2, label: "2ème Tableau", collection: TABLEAUX  %>
       <%= i.input :serie2, label: "Série" %>
     </div>
     <div class="col-xs-12 col-sm-4">
-      <%= i.input :tableau3, label: "3ème Tableau" %>
+      <%= i.input :tableau3, label: "3ème Tableau", collection: TABLEAUX  %>
       <%= i.input :serie3, label: "Série" %>
     </div>
     <div class="row text-center">

@@ -3,6 +3,13 @@ class RegistrationsController < ApplicationController
     @registrations = Registration.joins(:tournament).joins(:player).order(:tournament_id)
   end
 
+  def index_registrations_by_tournament
+    @registrations_by_tournaments = Registration.joins(:tournament).
+                                  joins(:player).
+                                  where(:tournament_id => params["id"])
+    raise
+  end
+
   def show
   end
 
