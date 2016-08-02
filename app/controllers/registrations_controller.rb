@@ -4,10 +4,11 @@ class RegistrationsController < ApplicationController
   end
 
   def index_registrations_by_tournament
+    @tournament = Tournament.where(id: params["id"]).first
     @registrations_by_tournaments = Registration.joins(:tournament).
                                   joins(:player).
                                   where(:tournament_id => params["id"])
-    raise
+
   end
 
   def show
