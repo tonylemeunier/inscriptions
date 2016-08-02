@@ -3,7 +3,9 @@ class TournamentsController < ApplicationController
 
   def index
     @tournaments = Tournament.order(:date)
-
+    @registrations_by_tournaments = Registration.joins(:tournament).
+                                  joins(:player).
+                                  where(:tournament_id => params["id"])
   end
 
 
