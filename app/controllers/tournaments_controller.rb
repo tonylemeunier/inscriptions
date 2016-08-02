@@ -2,10 +2,11 @@ class TournamentsController < ApplicationController
   before_action :set_tournament, only: [:show, :edit, :update, :delete]
 
   def index
-    @tournaments = Tournament.order(:date)
+    @tournaments = Tournament.all
     @registrations_by_tournaments = Registration.joins(:tournament).
                                   joins(:player).
                                   where(:tournament_id => params["id"])
+    # raise
   end
 
 
@@ -21,6 +22,8 @@ class TournamentsController < ApplicationController
     @tournament = Tournament.new(tournament_params)
     date = Date.parse(tournament_params["date"])
     @tournament.date = date
+    city = tournament_params["city"].capitalize
+    @tournament.city = city
     @tournament.save
     redirect_to tournaments_path
   end
