@@ -16,11 +16,10 @@ class TournamentsController < ApplicationController
 
   def create
     @tournament = Tournament.new(tournament_params)
-    date = tournament_params["date"].split('/')
-    preformatted_date = [date[2], date[0], date[1]].join('/')
-    formatted_date = Date.parse(preformatted_date).strftime("%A %m %B %Y")
-    @tournament.date = formatted_date
-
+    date = Date.parse(tournament_params["date"])
+    # date = tournament_params["date"].split('/')
+    # preformatted_date = [date[2], date[0], date[1]].join('/')
+    @tournament.date = date
     @tournament.save
     redirect_to tournaments_path
   end
