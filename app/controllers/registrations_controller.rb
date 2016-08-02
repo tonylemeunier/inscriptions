@@ -25,7 +25,7 @@ class RegistrationsController < ApplicationController
   def create
     @registration = Registration.new(registration_params)
     @registration.save
-    redirect_to tournament_registrations_path
+    redirect_to index_registrations_by_tournament_tournament_path
   end
 
   def edit

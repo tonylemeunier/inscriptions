@@ -1,31 +1,29 @@
 <div class="container">
+  <h2><%= @tournament.city %>, <%= @tournament.date.strftime("%a %m %B %Y") %></h2>
   <div class="container">
     <table class="table table-striped">
       <tr>
-        <th>Date</th>
-        <th>Ville</th>
+        <th>Nom</th>
+        <th>Prénom</th>
         <th>Tableau</th>
         <th>Série</th>
-        <th>1 tableau</th>
-        <th>2 tableaux</th>
-        <th>3 tableaux</th>
       </tr>
-      <tr>
-        <td><%= @tournament.date.strftime("%a %m %B %Y") %></td>
-        <td><%= @tournament.city %></td>
-        <td><%= @tournament.tableau %></td>
-        <td><%= @tournament.serie %></td>
-        <td><%= @tournament.price1 %></td>
-        <td><%= @tournament.price2 %></td>
-        <td><%= @tournament.price3 %></td>
-      </tr>
+      <% @registrations_by_tournaments.each do |registration| %>
+        <tr>
+          <td><%= registration.player.last_name %></td>
+          <td><%= registration.player.first_name %></td>
+          <td>
+            <%= registration.tableau1 %></br>
+            <%= registration.tableau2 %></br>
+            <%= registration.tableau3 %>
+          </td>
+          <td>
+            <%= registration.serie1 %></br>
+            <%= registration.serie2 %></br>
+            <%= registration.serie3 %>
+          </td>
+        </tr>
+      <% end %>
     </table>
-  </div>
-  <div class="container">
-    <% @registrations_by_tournaments.each do |registration| %>
-      <%= registration.tournament.city %>
-      </br><%= registration.player.last_name %> <%= registration.player.first_name %></br>
-      <%= registration.tableau1 %> <%= registration.serie1 %>
-    <% end %>
   </div>
 </div>
