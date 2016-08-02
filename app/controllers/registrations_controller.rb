@@ -1,19 +1,23 @@
 class RegistrationsController < ApplicationController
   def index
-    @registrations = Registration.all
+    @registrations = Registration.joins(:tournament).joins(:player).order(:tournament_id)
   end
 
   def show
   end
 
   def new
+    @tournament = Tournament.where(id: params["tournament_id"]).first
+    @all_players = Player.name_with_credit
     @registration = Registration.new
+
+
   end
 
   def create
     @registration = Registration.new(registration_params)
     @registration.save
-    redirect_to registrations_path
+    redirect_to tournament_registrations_path
   end
 
   def edit
@@ -34,16 +38,7 @@ class RegistrationsController < ApplicationController
   end
 
   def registration_params
-    params.require(:registration).permit(:tableau1, :serie1, :tableau2, :serie2, :tableau3, :serie3, :price)
+    params.require(:registration).permit(:tournament_id, :player_id, :tableau1, :serie1, :tableau2, :serie2, :tableau3, :serie3, :price)
   end
 end
 
-t.integer  "player_id"
-    t.integer  "tournament_id"
-    t.string   "tableau1"
-    t.string   "serie1"
-    t.string   "tableau2"
-    t.string   "serie2"
-    t.string   "tableau3"
-    t.string   "serie3"
-    t.integer  "price"
