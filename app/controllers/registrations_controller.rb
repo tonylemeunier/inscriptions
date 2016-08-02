@@ -3,6 +3,14 @@ class RegistrationsController < ApplicationController
     @registrations = Registration.joins(:tournament).joins(:player).order(:tournament_id)
   end
 
+  def index_registrations_by_tournament
+    @tournament = Tournament.where(id: params["id"]).first
+    @registrations_by_tournaments = Registration.joins(:tournament).
+                                  joins(:player).
+                                  where(:tournament_id => params["id"])
+
+  end
+
   def show
   end
 
@@ -17,7 +25,7 @@ class RegistrationsController < ApplicationController
   def create
     @registration = Registration.new(registration_params)
     @registration.save
-    redirect_to tournament_registrations_path
+    redirect_to index_registrations_by_tournament_tournament_path
   end
 
   def edit

@@ -1,0 +1,29 @@
+<div class="container">
+  <h2><%= @tournament.city %>, <%= @tournament.date.strftime("%a %m %B %Y") %></h2>
+  <div class="container">
+    <table class="table table-striped">
+      <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Tableau</th>
+        <th>Série</th>
+      </tr>
+      <% @registrations_by_tournaments.each do |registration| %>
+        <tr>
+          <td><%= registration.player.last_name %></td>
+          <td><%= registration.player.first_name %></td>
+          <td>
+            <%= registration.tableau1 %></br>
+            <%= registration.tableau2 %></br>
+            <%= registration.tableau3 %>
+          </td>
+          <td>
+            <%= registration.serie1 %></br>
+            <%= registration.serie2 %></br>
+            <%= registration.serie3 %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

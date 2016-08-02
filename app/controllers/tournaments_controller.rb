@@ -3,9 +3,12 @@ class TournamentsController < ApplicationController
 
   def index
     @tournaments = Tournament.order(:date)
-    @registrations = Registration.joins(:tournament).joins(:player).order(:tournament_id)
-
+    @registrations_by_tournaments = Registration.joins(:tournament).
+                                  joins(:player).
+                                  where(:tournament_id => params["id"])
   end
+
+
 
   def show
   end
@@ -17,8 +20,6 @@ class TournamentsController < ApplicationController
   def create
     @tournament = Tournament.new(tournament_params)
     date = Date.parse(tournament_params["date"])
-    # date = tournament_params["date"].split('/')
-    # preformatted_date = [date[2], date[0], date[1]].join('/')
     @tournament.date = date
     @tournament.save
     redirect_to tournaments_path

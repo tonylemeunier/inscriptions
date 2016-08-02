@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   resources :players
   resources :tournaments do
     resources :registrations
-  end
+      member do
+        get 'index_registrations_by_tournament', to: "registrations#index_registrations_by_tournament"
 
+      end
+  end
 end
