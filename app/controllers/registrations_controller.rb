@@ -1,14 +1,5 @@
 class RegistrationsController < ApplicationController
   def index
-    @registrations = Registration.joins(:tournament).joins(:player).order(:tournament_id)
-  end
-
-  def index_registrations_by_tournament
-    @tournament = Tournament.where(id: params["id"]).first
-    @registrations_by_tournaments = Registration.joins(:tournament).
-                                  joins(:player).
-                                  where(:tournament_id => params["id"])
-
   end
 
   def show
