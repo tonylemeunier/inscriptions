@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
 
-    <div class="col-xs-12 col-sm-8">
+    <div class="col-xs-12 col-sm-8 col-sm-offset-2">
       <div class="text-center">
         <h2>Tous les tournois</h2>
       </div>
@@ -54,9 +54,7 @@
                     <% end %>
                   </td>
                   <td align="center">
-                    <%= link_to tournaments_path(:id => tournament.id) do %>
-                      <i class="fa fa-list" aria-hidden="true"></i>
-                    <% end %>
+                    <%= link_to "Liste", tournaments_path(:id => tournament.id), "data-toggle" => "modal", 'data-target' => '#loginModal' %>
                   </td>
                 </tr>
               <% end %>
@@ -65,53 +63,38 @@
         <% end %>
       </div>
     </div>
+  </div>
+</div>
 
-    <div class="col-xs-12 col-sm-4" id="fixed_div">
+<div class="modal" id="loginModal">
 
-      <div class="text-center">
-        <h2>Les inscrits</h2>
-      </div>
-
-      <table class="table table-striped" >
-        <tr>
-          <th>Nom</th>
-          <th>Prénom</th>
-          <th>Tableau</th>
-          <th>Série</th>
-        </tr>
-        <% @registrations_by_tournaments.each do |registration| %>
-          <tr>
-            <td><%= registration.player.last_name %></td>
-            <td><%= registration.player.first_name %></td>
-            <td>
-              <%= registration.tableau1 %></br>
-              <%= registration.tableau2 %></br>
-              <%= registration.tableau3 %>
-            </td>
-            <td>
-              <%= registration.serie1 %></br>
-              <%= registration.serie2 %></br>
-              <%= registration.serie3 %>
-            </td>
-          </tr>
-        <% end %>
-      </table>
-    </div>
-
+  <div class="text-center">
+    <h2>Les inscrits</h2>
   </div>
 
-
+  <table class="table table-striped" >
+    <tr>
+      <th>Nom</th>
+      <th>Prénom</th>
+      <th>Tableau</th>
+      <th>Série</th>
+    </tr>
+    <% @registrations_by_tournaments.each do |registration| %>
+      <tr>
+        <td><%= registration.player.last_name %></td>
+        <td><%= registration.player.first_name %></td>
+        <td>
+          <%= registration.tableau1 %></br>
+          <%= registration.tableau2 %></br>
+          <%= registration.tableau3 %>
+        </td>
+        <td>
+          <%= registration.serie1 %></br>
+          <%= registration.serie2 %></br>
+          <%= registration.serie3 %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
 </div>
 
-
-
-
-
-
-
-
-
-<div class="container">
-
-
-</div>
