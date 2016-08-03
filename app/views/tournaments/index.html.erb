@@ -4,56 +4,68 @@
       <div class="text-center">
         <h2>Tous les tournois</h2>
       </div>
-      <% @tournaments.each do |tournament| %>
-        <table class="table table-striped">
+      <% @tournaments.each do |hash| %>
+        <table class="table table-striped" style="margin-bottom: 40px;">
           <tr>
-            <th>Date</th>
+            <th><%= hash[:name] %></th>
             <th>Ville</th>
             <th>Tableau</th>
             <th>Série</th>
-            <th>1 tableau</th>
-            <th>2 tableaux</th>
-            <th>3 tableaux</th>
+            <th>1 tab.</th>
+            <th>2 tab.</th>
+            <th>3 tab.</th>
+            <th>S'incrire</th>
+            <th>Inscrits</th>
           </tr>
-          <tr>
-            <td><%= tournament.date.strftime("%a %m %B %Y") %></td>
-            <td><%= tournament.city %></td>
-            <td><%= tournament.tableau %></td>
-            <td><%= tournament.serie %></td>
-            <td align="center"><%= tournament.price1 %>€</td>
-            <td align="center">
-              <% if tournament.price2 == nil %>
-                <i class="fa fa-times" aria-hidden="true"></i>
-              <% else %>
-                <%= tournament.price2 %>€
-              <% end %>
-            </td>
-            <td align="center">
-              <% if tournament.price3 == nil %>
-                <i class="fa fa-times" aria-hidden="true"></i>
-              <% else %>
-                <%= tournament.price3 %>€
-              <% end %>
-            </td>
-          </tr>
+          <% if hash[:array].empty? %>
+            <tr>
+              <td colspan="4">
+                <i class="fa fa-times" aria-hidden="true" style="color: red;"></i> Pas de tournoi référencé pour le moment
+              </td>
+            </tr>
+          <% else %>
+          <% hash[:array].each do |tournament| %>
+            <tr>
+              <td><%= tournament.date.strftime("%A %e") %></td>
+              <td><%= tournament.city %></td>
+              <td><%= tournament.tableau %></td>
+              <td><%= tournament.serie %></td>
+              <td align="center"><%= tournament.price1 %>€</td>
+              <td align="center">
+                <% if tournament.price2 == nil %>
+                  <i class="fa fa-times" aria-hidden="true"></i>
+                <% else %>
+                  <%= tournament.price2 %>€
+                <% end %>
+              </td>
+              <td align="center">
+                <% if tournament.price3 == nil %>
+                  <i class="fa fa-times" aria-hidden="true"></i>
+                <% else %>
+                  <%= tournament.price3 %>€
+                <% end %>
+              </td>
+              <td align="center">
+                <%= link_to new_tournament_registration_path(:tournament_id => tournament.id) do %>
+                  <i class="fa fa-pencil" aria-hidden="true"></i>
+                <% end %>
+              </td>
+              <td align="center">
+                <%= link_to tournaments_path(:id => tournament.id) do %>
+                  <i class="fa fa-list" aria-hidden="true"></i>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
         </table>
-        <div class="links_under_table">
-          <%= link_to new_tournament_registration_path(:tournament_id => tournament.id) do %>
-            <i class="fa fa-pencil" aria-hidden="true"></i>
-            <span>(S'inscrire)</span>
-          <% end %>
-          <%= link_to tournaments_path(:id => tournament.id) do %>
-            <i class="fa fa-list" aria-hidden="true"></i>
-            <span>(Inscrits)</span>
-          <% end %>
-        </div>
+        <% end %>
       <% end %>
     </div>
     <div class="col-xs-12 col-sm-4" id="fixed_div">
       <div class="text-center">
         <h2>Les inscrits</h2>
       </div>
-      <table class="table table-striped" id="registrations_tournament">
+      <table class="table table-striped" >
         <tr>
           <th>Nom</th>
           <th>Prénom</th>
@@ -80,3 +92,5 @@
     </div>
   </div>
 </div>
+
+
