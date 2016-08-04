@@ -54,17 +54,26 @@
     <div class="col-xs-12 col-sm-4">
       <%= i.input :tableau1, label: "1er Tableau", collection: TABLEAUX %>
       <%= i.input :serie1, label: "Série" %>
+      <div id="com1" style="display:none">
+        <%= i.input :com1, label: "Nom de votre partenaire de Double / Mixte" %>
+      </div>
     </div>
     <% if @tournament.price2 != nil %>
       <div class="col-xs-12 col-sm-4">
         <%= i.input :tableau2, label: "2ème Tableau", collection: TABLEAUX  %>
         <%= i.input :serie2, label: "Série" %>
+        <div id="com2" style="display:none">
+          <%= i.input :com2, label: "Nom de votre partenaire de Double / Mixte" %>
+        </div>
       </div>
     <% end %>
     <% if @tournament.price3 != nil %>
       <div class="col-xs-12 col-sm-4">
         <%= i.input :tableau3, label: "3ème Tableau", collection: TABLEAUX  %>
         <%= i.input :serie3, label: "Série" %>
+        <div id="com3" style="display:none">
+          <%= i.input :com3, label: "Nom de votre partenaire de Double / Mixte" %>
+        </div>
       </div>
     <% end %>
     <div class="row text-center">
