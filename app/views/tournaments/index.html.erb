@@ -1,59 +1,109 @@
 <div class="container">
-  <div class="text-center">
-    <h2>Tous les tournois</h2>
-  </div>
   <div class="row">
+
     <div class="col-xs-12 col-sm-8">
-      <% @tournaments.each do |tournament| %>
-        <table class="table table-striped">
+      <div class="text-center">
+        <h2>Tous les tournois</h2>
+      </div>
+
+      <div>
+        <% @tournaments.each do |hash| %>
+          <table class="table table-striped" style="margin-bottom: 40px;">
+            <tr>
+              <th><%= hash[:name] %></th>
+              <th>Ville</th>
+              <th>Tableau</th>
+              <th>Série</th>
+              <th>1 tab.</th>
+              <th>2 tab.</th>
+              <th>3 tab.</th>
+              <th>S'incrire</th>
+              <th>Inscrits</th>
+            </tr>
+            <% if hash[:array].empty? %>
+              <tr>
+                <td colspan="4">
+                  <i class="fa fa-times" aria-hidden="true" style="color: red;"></i> Pas de tournoi référencé pour le moment
+                </td>
+              </tr>
+            <% else %>
+              <% hash[:array].each do |tournament| %>
+                <tr>
+                  <td><%= tournament.date.strftime("%A %e") %></td>
+                  <td><%= tournament.city %></td>
+                  <td><%= tournament.tableau %></td>
+                  <td><%= tournament.serie %></td>
+                  <td align="center"><%= tournament.price1 %>€</td>
+                  <td align="center">
+                    <% if tournament.price2 == nil %>
+                      <i class="fa fa-times" aria-hidden="true"></i>
+                    <% else %>
+                      <%= tournament.price2 %>€
+                    <% end %>
+                  </td>
+                  <td align="center">
+                    <% if tournament.price3 == nil %>
+                      <i class="fa fa-times" aria-hidden="true"></i>
+                    <% else %>
+                      <%= tournament.price3 %>€
+                    <% end %>
+                  </td>
+                  <td align="center">
+                    <%= link_to new_tournament_registration_path(:tournament_id => tournament.id) do %>
+                      <i class="fa fa-pencil" aria-hidden="true"></i>
+                    <% end %>
+                  </td>
+                  <td align="center">
+
+                   <%= link_to "Liste", tournaments_path(:id => tournament.id), data: {toggle: "modal", target: "#loginModal"} %>
+                  </td>
+                </tr>
+              <% end %>
+            <% end %>
+          </table>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal fade", id="loginModal", tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h2>Les inscrits</h2>
+      </div>
+      <div class="modal-body">
+        <table class="table table-striped" >
           <tr>
-            <th>Date</th>
-            <th>Ville</th>
+            <th>Nom</th>
+            <th>Prénom</th>
             <th>Tableau</th>
             <th>Série</th>
-            <th>1 tableau</th>
-            <th>2 tableaux</th>
-            <th>3 tableaux</th>
           </tr>
-          <tr>
-            <td><%= tournament.date.strftime("%a %m %B %Y") %></td>
-            <td><%= tournament.city %></td>
-            <td><%= tournament.tableau %></td>
-            <td><%= tournament.serie %></td>
-            <td align="center"><%= tournament.price1 %></td>
-            <td align="center"><%= tournament.price2 %></td>
-            <td align="center"><%= tournament.price3 %></td>
-          </tr>
+          <% @registrations_by_tournaments.each do |registration| %>
+            <tr>
+              <td><%= registration.player.last_name %></td>
+              <td><%= registration.player.first_name %></td>
+              <td>
+                <%= registration.tableau1 %></br>
+                <%= registration.tableau2 %></br>
+                <%= registration.tableau3 %>
+              </td>
+              <td>
+                <%= registration.serie1 %></br>
+                <%= registration.serie2 %></br>
+                <%= registration.serie3 %>
+              </td>
+            </tr>
+          <% end %>
         </table>
-        <%= link_to "S'inscrire", new_tournament_registration_path(:tournament_id => tournament.id), class: "btn" %>
-        <%= link_to "Inscrits", tournaments_path(:id => tournament.id), class: "btn" %>
-      <% end %>
-    </div>
-    <div class="col-xs-12 col-sm-4">
-      <table class="table table-striped" id="registrations_tournament">
-        <tr>
-          <th>Nom</th>
-          <th>Prénom</th>
-          <th>Tableau</th>
-          <th>Série</th>
-        </tr>
-        <% @registrations_by_tournaments.each do |registration| %>
-          <tr>
-            <td><%= registration.player.last_name %></td>
-            <td><%= registration.player.first_name %></td>
-            <td>
-              <%= registration.tableau1 %></br>
-              <%= registration.tableau2 %></br>
-              <%= registration.tableau3 %>
-            </td>
-            <td>
-              <%= registration.serie1 %></br>
-              <%= registration.serie2 %></br>
-              <%= registration.serie3 %>
-            </td>
-          </tr>
-        <% end %>
-      </table>
+      </div>
     </div>
   </div>
 </div>
+
+
+
