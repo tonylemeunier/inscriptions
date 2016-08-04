@@ -54,10 +54,8 @@
                     <% end %>
                   </td>
                   <td align="center">
-                    <%= link_to tournaments_path(:id => tournament.id) do %>
-                      <i class="fa fa-list" aria-hidden="true"></i>
-                    <% end %>
-                   <!--  <#%= link_to "Liste", tournaments_path(:id => tournament.id), data: {toggle: "modal", target: "#loginModal"} %> -->
+
+                   <%= link_to "Liste", tournaments_path(:id => tournament.id), data: {toggle: "modal", target: "#loginModal"} %>
                   </td>
                 </tr>
               <% end %>
@@ -66,35 +64,7 @@
         <% end %>
       </div>
     </div>
-    <div class="col-xs-12 col-sm-4" id="fixed_div">
-      <div>
-        <h3>Inscrits</h3>
-      </div>
-      <table class="table table-striped">
-        <tr>
-          <th>Nom</th>
-          <th>Prénom</th>
-          <th>Tableau</th>
-          <th>Série</th>
-        </tr>
-        <% @registrations_by_tournaments.each do |registration| %>
-          <tr>
-            <td><%= registration.player.last_name %></td>
-            <td><%= registration.player.first_name %></td>
-            <td>
-              <%= registration.tableau1 %></br>
-              <%= registration.tableau2 %></br>
-              <%= registration.tableau3 %>
-            </td>
-            <td>
-              <%= registration.serie1 %></br>
-              <%= registration.serie2 %></br>
-              <%= registration.serie3 %>
-            </td>
-          </tr>
-        <% end %>
-      </table>
-    </div>
+
   </div>
 </div>
 
