@@ -15,8 +15,16 @@ class RegistrationsController < ApplicationController
 
   def create
     @registration = Registration.new(registration_params)
-    @registration.save
-    redirect_to tournaments_path
+    player = Player.find(registration_params["player_id"].to_i)
+    if player.credit < registration_params["price"].to_i
+      redirect_to '/credit-insuffisant'
+    else
+      new_credit = player.credit - registration_params["price"].to_i
+      player.credit = new_credit
+      player.save
+      @registration.save
+      redirect_to tournaments_path
+    end
   end
 
   def edit

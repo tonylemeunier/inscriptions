@@ -1,27 +1,42 @@
 <div class="container text-center">
-  <h2>Inscription à un tournoi</h2>
+  <h2>
+    Inscription au tournoi de <%= @tournament.city %>
+    </br>
+    <% if @tournament.date2 == nil %>
+      <%= @tournament.date.strftime("%d / %m / %Y ") %>
+    <% else %>
+      <%= @tournament.date.strftime("%d") %> et <%= @tournament.date2.strftime("%d / %m / %Y ") %>
+    <% end %>
+  </h2>
 </div>
 <div class="container">
-  <table class="table table-striped">
-    <tr>
-      <th>Date</th>
-      <th>Ville</th>
-      <th>Tableau</th>
-      <th>Série</th>
-      <th>1 tableau</th>
-      <th>2 tableaux</th>
-      <th>3 tableaux</th>
-    </tr>
-    <tr>
-      <td><%= @tournament.date.strftime("%a %m %B %Y") %></td>
-      <td><%= @tournament.city %></td>
-      <td><%= @tournament.tableau %></td>
-      <td><%= @tournament.serie %></td>
-      <td><%= @tournament.price1 %></td>
-      <td><%= @tournament.price2 %></td>
-      <td><%= @tournament.price3 %></td>
-    </tr>
-  </table>
+  <div class="row">
+    <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+      <table class="table table-striped" style="margin-bottom: 40px;">
+        <tr>
+          <th>1 tab.</th>
+          <th>2 tab.</th>
+          <th>3 tab.</th>
+        </tr>
+          <td align="center"><%= @tournament.price1 %>€</td>
+          <td align="center">
+            <% if @tournament.price2 == nil %>
+              <i class="fa fa-times" aria-hidden="true"></i>
+            <% else %>
+              <%= @tournament.price2 %>€
+            <% end %>
+          </td>
+          <td align="center">
+            <% if @tournament.price3 == nil %>
+              <i class="fa fa-times" aria-hidden="true"></i>
+            <% else %>
+              <%= @tournament.price3 %>€
+            <% end %>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
 </div>
 
 <div class="container">
@@ -40,14 +55,18 @@
       <%= i.input :tableau1, label: "1er Tableau", collection: TABLEAUX %>
       <%= i.input :serie1, label: "Série" %>
     </div>
-    <div class="col-xs-12 col-sm-4">
-      <%= i.input :tableau2, label: "2ème Tableau", collection: TABLEAUX  %>
-      <%= i.input :serie2, label: "Série" %>
-    </div>
-    <div class="col-xs-12 col-sm-4">
-      <%= i.input :tableau3, label: "3ème Tableau", collection: TABLEAUX  %>
-      <%= i.input :serie3, label: "Série" %>
-    </div>
+    <% if @tournament.price2 != nil %>
+      <div class="col-xs-12 col-sm-4">
+        <%= i.input :tableau2, label: "2ème Tableau", collection: TABLEAUX  %>
+        <%= i.input :serie2, label: "Série" %>
+      </div>
+    <% end %>
+    <% if @tournament.price3 != nil %>
+      <div class="col-xs-12 col-sm-4">
+        <%= i.input :tableau3, label: "3ème Tableau", collection: TABLEAUX  %>
+        <%= i.input :serie3, label: "Série" %>
+      </div>
+    <% end %>
     <div class="row text-center">
       <%= i.button :submit, "M'inscrire" %>
     </div>
