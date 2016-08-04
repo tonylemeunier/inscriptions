@@ -29,7 +29,13 @@
             <% else %>
               <% hash[:array].each do |tournament| %>
                 <tr>
-                  <td><%= tournament.date.strftime("%A %e") %></td>
+                  <td>
+                    <%= tournament.date.strftime("%A %e") %>
+                      </br>
+                    <% if tournament.date2 != nil %>
+                      <%= tournament.date2.strftime("%A %e") %>
+                    <% end %>
+                  </td>
                   <td><%= tournament.city %></td>
                   <td><%= tournament.tableau %></td>
                   <td><%= tournament.serie %></td>
