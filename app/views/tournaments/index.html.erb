@@ -30,10 +30,26 @@
               <% hash[:array].each do |tournament| %>
                 <tr>
                   <td>
+                    <% if tournament.date.strftime("%A %e").match(/Friday/) %>
+                      <%= tournament.date.strftime("%A %e").gsub(/Friday/, "Vendredi") %>
+                    <% elsif tournament.date.strftime("%A %e").match(/Saturday/) %>
+                      <%= tournament.date.strftime("%A %e").gsub(/Saturday/, "Samedi") %>
+                    <% elsif tournament.date.strftime("%A %e").match(/Sunday/) %>
+                      <%= tournament.date.strftime("%A %e").gsub(/Sunday/, "Dimanche") %>
+                    <% else %>
                     <%= tournament.date.strftime("%A %e") %>
-                      </br>
+                    <% end%>
                     <% if tournament.date2 != nil %>
-                      <%= tournament.date2.strftime("%A %e") %>
+                      </br>
+                      <% if tournament.date2.strftime("%A %e").match(/Friday/) %>
+                      <%= tournament.date2.strftime("%A %e").gsub(/Friday/, "Vendredi") %>
+                    <% elsif tournament.date2.strftime("%A %e").match(/Saturday/) %>
+                      <%= tournament.date2.strftime("%A %e").gsub(/Saturday/, "Samedi") %>
+                    <% elsif tournament.date2.strftime("%A %e").match(/Sunday/) %>
+                      <%= tournament.date2.strftime("%A %e").gsub(/Sunday/, "Dimanche") %>
+                    <% else %>
+                    <%= tournament.date2.strftime("%A %e") %>
+                    <% end%>
                     <% end %>
                   </td>
                   <td><%= tournament.city %></td>
