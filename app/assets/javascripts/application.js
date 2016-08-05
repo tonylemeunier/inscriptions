@@ -5,6 +5,7 @@
 //= require_tree .
 
 $(document).ready(function(){
+  event.preventDefault();
   $('input[type="date"]').datepicker({
     format: "dd/mm/yyyy" });
 

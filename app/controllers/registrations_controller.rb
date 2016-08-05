@@ -16,10 +16,28 @@ class RegistrationsController < ApplicationController
   def create
     @registration = Registration.new(registration_params)
     player = Player.find(registration_params["player_id"].to_i)
-    if player.credit < registration_params["price"].to_i
+    tournament = Tournament.find(registration_params["tournament_id"].to_i)
+
+    tableau1 = registration_params["tableau1"]
+    serie1 = registration_params["serie1"]
+    tableau2 = registration_params["tableau2"]
+    serie2 = registration_params["serie2"]
+    tableau3 = registration_params["tableau3"]
+    serie3 = registration_params["serie3"]
+
+    if tableau2 == nil || tableau2 == ""
+      @registration.price = tournament.price1
+    elsif tableau3 == nil || tableau3 == ""
+      @registration.price = tournament.price2
+    else
+      @registration.price = tournament.price3
+    end
+
+
+    if player.credit < @registration.price
       redirect_to '/credit-insuffisant'
     else
-      new_credit = player.credit - registration_params["price"].to_i
+      new_credit = player.credit - @registration.price
       player.credit = new_credit
       player.save
       @registration.save
@@ -45,7 +63,7 @@ class RegistrationsController < ApplicationController
   end
 
   def registration_params
-    params.require(:registration).permit(:tournament_id, :player_id, :tableau1, :serie1, :tableau2, :serie2, :tableau3, :serie3, :price, :com1, :com2, :com3)
+    params.require(:registration).permit(:tournament_id, :player_id, :tableau1, :serie1, :tableau2, :serie2, :tableau3, :serie3, :com1, :com2, :com3)
   end
 end
 
