@@ -2,10 +2,10 @@
 // All this logic will automatically be available in application.js.
 
 $(document).ready(function() {
-  console.log('JS test')
+  event.preventDefault();
 // when a tableau is selected
   $('#registration_tableau1').change(function() {
-    // cache les 5 élements
+    // cache les 3 élements
     $('#com1').hide();
     $('#com2').hide();
     $('#com3').hide();
@@ -22,7 +22,7 @@ $(document).ready(function() {
   });
 
   $('#registration_tableau2').change(function() {
-    // cache les 5 élements
+    // cache les 3 élements
     $('#com1').hide();
     $('#com2').hide();
     $('#com3').hide();
@@ -39,7 +39,7 @@ $(document).ready(function() {
   });
 
   $('#registration_tableau3').change(function() {
-    // cache les 5 élements
+    // cache les 3 élements
     $('#com1').hide();
     $('#com2').hide();
     $('#com3').hide();
@@ -54,5 +54,8 @@ $(document).ready(function() {
       $('#com3').hide();
     }
   });
+
+
+
 
 })
