@@ -1,5 +1,10 @@
 class RegistrationsController < ApplicationController
   def index
+    @tournament = Tournament.find(params["tournament_id"])
+    @registrations_by_tournaments = Registration.joins(:tournament).
+                                  joins(:player).
+                                  where(:tournament_id => params["tournament_id"])
+
   end
 
   def show

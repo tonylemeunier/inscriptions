@@ -1,6 +1,41 @@
 <div class="container">
-  <% @registrations.each do |registration| %>
-    <%= registration.tournament.city %>
-    </br><%= registration.player.last_name %> <%= registration.player.first_name %></br>
-  <% end %>
+  <div class="text-center">
+    <h2>
+      Les inscrits au tournoi de <%= @tournament.city %>
+      </br>
+      <% if @tournament.date2 == nil %>
+        <%= @tournament.date.strftime("%d / %m / %Y ") %>
+      <% else %>
+        <%= @tournament.date.strftime("%d") %> et <%= @tournament.date2.strftime("%d / %m / %Y ") %>
+      <% end %>
+    </h2>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+      <table class="table table-striped" >
+        <tr>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Tableau</th>
+          <th>Série</th>
+        </tr>
+        <% @registrations_by_tournaments.each do |registration| %>
+          <tr>
+            <td><%= registration.player.last_name %></td>
+            <td><%= registration.player.first_name %></td>
+            <td>
+              <%= registration.tableau1 %></br>
+              <%= registration.tableau2 %></br>
+              <%= registration.tableau3 %>
+            </td>
+            <td>
+              <%= registration.serie1 %></br>
+              <%= registration.serie2 %></br>
+              <%= registration.serie3 %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
 </div>

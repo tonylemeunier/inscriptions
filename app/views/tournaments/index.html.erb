@@ -77,7 +77,10 @@
                   </td>
                   <td align="center">
 
-                   <%= link_to "Liste", tournaments_path(:id => tournament.id), data: {toggle: "modal", target: "#loginModal"} %>
+                  <%= link_to tournament_registrations_path(:tournament_id => tournament.id) do %>
+                    <i class="fa fa-list-alt" aria-hidden="true"></i>
+
+                  <% end %>
                   </td>
                 </tr>
               <% end %>
@@ -87,43 +90,6 @@
       </div>
     </div>
 
-  </div>
-</div>
-
-<div class="modal fade", id="loginModal", tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h2>Les inscrits</h2>
-      </div>
-      <div class="modal-body">
-        <table class="table table-striped" >
-          <tr>
-            <th>Nom</th>
-            <th>Prénom</th>
-            <th>Tableau</th>
-            <th>Série</th>
-          </tr>
-          <% @registrations_by_tournaments.each do |registration| %>
-            <tr>
-              <td><%= registration.player.last_name %></td>
-              <td><%= registration.player.first_name %></td>
-              <td>
-                <%= registration.tableau1 %></br>
-                <%= registration.tableau2 %></br>
-                <%= registration.tableau3 %>
-              </td>
-              <td>
-                <%= registration.serie1 %></br>
-                <%= registration.serie2 %></br>
-                <%= registration.serie3 %>
-              </td>
-            </tr>
-          <% end %>
-        </table>
-      </div>
-    </div>
   </div>
 </div>
 
