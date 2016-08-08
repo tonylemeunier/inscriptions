@@ -125,9 +125,16 @@ class RegistrationsController < ApplicationController
     redirect_to tournament_registrations_path(:tournament_id => registration_params["tournament_id"].to_i)
   end
 
-  def delete
+  def destroy
+    @registration = Registration.find(params[:id])
+    # réaffecter le solde du joueur
+    player = Player.find(@registration.player_id.to_i)
+    new_credit = player.credit + @registration.price
+    player.credit = new_credit
+    player.save
+
     @registration.destroy
-    redirect_to registrations_path
+    redirect_to tournament_registrations_path(:tournament_id => params["tournament_id"].to_i)
   end
 
   private

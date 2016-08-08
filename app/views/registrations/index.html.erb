@@ -40,7 +40,12 @@
                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
               <% end %>
             </td>
-            <td></td>
+            <td>
+              <%= link_to tournament_registration_path(:tournament_id => registration.tournament_id, :id => registration.id),
+                    method: :delete, data: { confirm: 'Êtes-vous sûr de vouloir supprimer cette inscription ?' } do %>
+                <i class="fa fa-times" aria-hidden="true"></i>
+              <% end %>
+            </td>
           </tr>
         <% end %>
       </table>
