@@ -20,8 +20,6 @@ class RegistrationsController < ApplicationController
     player = Player.find(registration_params["player_id"].to_i)
     tournament = Tournament.find(registration_params["tournament_id"].to_i)
 
-    tableau1 = registration_params["tableau1"]
-    serie1 = registration_params["serie1"]
     tableau2 = registration_params["tableau2"]
     serie2 = registration_params["serie2"]
     tableau3 = registration_params["tableau3"]
@@ -57,7 +55,73 @@ class RegistrationsController < ApplicationController
     @tournament = Tournament.find(registration_params["tournament_id"].to_i)
     @player = Player.find(registration_params["player_id"].to_i)
     @registration = Registration.find(params["id"])
-    @registration.update(registration_params)
+    price_before = @registration.price
+
+    # Define the new price
+
+    tableau2 = registration_params["tableau2"]
+    serie2 = registration_params["serie2"]
+    tableau3 = registration_params["tableau3"]
+    serie3 = registration_params["serie3"]
+
+    if tableau2 == nil || tableau2 == ""
+      @registration.update(
+                            "tableau1"=>registration_params["tableau1"],
+                            "serie1"=>registration_params["serie1"],
+                            "tableau2"=>registration_params["tableau2"],
+                            "serie2"=>registration_params["serie2"],
+                            "tableau3"=>registration_params["tableau3"],
+                            "serie3"=>registration_params["serie3"],
+                            "com1"=>registration_params["com1"],
+                            "com2"=>registration_params["com2"],
+                            "com3"=>registration_params["com3"],
+                            "price" => @tournament.price1)
+    elsif tableau3 == nil || tableau3 == ""
+      @registration.update(
+                            "tableau1"=>registration_params["tableau1"],
+                            "serie1"=>registration_params["serie1"],
+                            "tableau2"=>registration_params["tableau2"],
+                            "serie2"=>registration_params["serie2"],
+                            "tableau3"=>registration_params["tableau3"],
+                            "serie3"=>registration_params["serie3"],
+                            "com1"=>registration_params["com1"],
+                            "com2"=>registration_params["com2"],
+                            "com3"=>registration_params["com3"],
+                            "price" => @tournament.price2)
+    else
+      @registration.update(
+                            "tableau1"=>registration_params["tableau1"],
+                            "serie1"=>registration_params["serie1"],
+                            "tableau2"=>registration_params["tableau2"],
+                            "serie2"=>registration_params["serie2"],
+                            "tableau3"=>registration_params["tableau3"],
+                            "serie3"=>registration_params["serie3"],
+                            "com1"=>registration_params["com1"],
+                            "com2"=>registration_params["com2"],
+                            "com3"=>registration_params["com3"],
+                            "price" => @tournament.price3)
+    end
+    # Define the new price - END
+
+    # Vérif différence prix
+    # If a tableau is added
+    if price_before < @registration.price
+      extra_charge = @registration.price - price_before
+      if @player.credit < extra_charge
+        redirect_to '/credit-insuffisant'
+      else
+        new_credit = @player.credit - extra_charge
+        @player.credit = new_credit
+        @player.save
+      end
+    # else a tableau is deleted
+    else
+      minus_charge = price_before - @registration.price
+      new_credit = @player.credit + minus_charge
+      @player.credit = new_credit
+      @player.save
+    end
+
     redirect_to tournament_registrations_path(:tournament_id => registration_params["tournament_id"].to_i)
   end
 
