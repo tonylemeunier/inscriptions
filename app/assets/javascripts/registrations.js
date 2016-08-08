@@ -2,7 +2,7 @@
 // All this logic will automatically be available in application.js.
 
 $(document).ready(function() {
-  event.preventDefault();
+
 // when a tableau is selected
   $('#registration_tableau1').change(function() {
     // cache les 3 élements

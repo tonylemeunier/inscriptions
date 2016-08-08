@@ -25,9 +25,7 @@ class TournamentsController < ApplicationController
     @tournaments_july = Tournament.where(date: Date.new(2017, 7, 1)...Date.new(2017, 8, 1)).order(:date)
     @july = { name: "Juillet 2017", array: @tournaments_july}
     @tournaments = [@september, @october, @november, @december, @january, @february, @march, @april, @may, @june, @july]
-    @registrations_by_tournaments = Registration.joins(:tournament).
-                                  joins(:player).
-                                  where(:tournament_id => params["id"])
+
                                 # raise
   end
 
