@@ -4,18 +4,15 @@ class RegistrationsController < ApplicationController
     @registrations_by_tournaments = Registration.joins(:tournament).
                                   joins(:player).
                                   where(:tournament_id => params["tournament_id"])
-
   end
 
   def show
   end
 
   def new
-    @tournament = Tournament.where(id: params["tournament_id"]).first
+    @tournament = Tournament.find(params["tournament_id"])
     @all_players = Player.name_with_credit
     @registration = Registration.new
-
-
   end
 
   def create
@@ -51,9 +48,17 @@ class RegistrationsController < ApplicationController
   end
 
   def edit
+    @tournament = Tournament.find(params["tournament_id"].to_i)
+    @registration = Registration.find(params["id"])
+    @player = Player.find(@registration.player_id)
   end
 
   def update
+    @tournament = Tournament.find(registration_params["tournament_id"].to_i)
+    @player = Player.find(registration_params["player_id"].to_i)
+    @registration = Registration.find(params["id"])
+    @registration.update(registration_params)
+    redirect_to tournament_registrations_path(:tournament_id => registration_params["tournament_id"].to_i)
   end
 
   def delete
