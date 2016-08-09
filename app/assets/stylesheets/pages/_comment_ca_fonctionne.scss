@@ -1,0 +1,28 @@
+.fonctionne-content {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  border-bottom: double 4px #c9c9c9;
+}
+
+.fonctionne-fontawesome {
+  padding: 70px;
+  border-right: solid 1px $gray-light;
+}
+
+.fonction-description {
+  padding-left: 40px;
+}
+
+.fonction-description>h2 {
+    color: $blue;
+  }
+
+.fonctionne-fa-left {
+  width: 75px;
+  color: $red;
+}
+
+.fonctionne-btn {
+  margin: 2px 6px 10px 6px;
+}

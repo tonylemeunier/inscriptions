@@ -17,6 +17,17 @@
   top: 0px;
   z-index: 1;
   width: 100%;
+  background: transparent;
+  transition: all 0.3s ease;
+  display: flex;
+  height: 70px;
+  padding: 0px 30px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.white_navbar {
+  color : white;
 }
 
 /* Navbar logo */

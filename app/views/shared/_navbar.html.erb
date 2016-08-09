@@ -1,4 +1,4 @@
-<div class="navbar-wagon">
+<div class="<%=  params[:action] == "home" ? 'navbar-wagon-fixed' : 'navbar-wagon' %>">
   <!-- Logo -->
   <%= link_to root_path, class: "navbar-wagon-brand" do %>
     <%= image_tag "logo_maure.png" %>
@@ -13,7 +13,7 @@
       <!-- Profile picture and dropdown -->
       <div class="navbar-wagon-item">
         <div class="dropdown">
-          <%= image_tag "logo_maure.png", class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %> Connecté
+          <%= image_tag "logo_maure.png", class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %> <span class="white_navbar">Connecté</span>
           <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
             <li>
               <%= link_to new_tournament_path do %>
@@ -37,8 +37,9 @@
     <% else %>
 
       <!-- Login text link -->
-      <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
-
+      <%= link_to new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" do %>
+        <i class="fa fa-sign-in fa-2x white_navbar" aria-hidden="true"></i>
+      <% end %>
     <% end %>
 
   </div>

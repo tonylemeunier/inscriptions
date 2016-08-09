@@ -1,9 +1,15 @@
 <div class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.4) 0%, rgba(0,36,61,0.4) 30%), url(<%= asset_path "banner.jpg" %>); background-size: cover !important; background-position: center;">
   <div class="banner-content">
     <h2>Gestion des inscriptions aux tournois extérieurs</h2>
-    </br>
-    <p>Réservé aux joueurs du Maure Badminton Club</p>
-    </br>
-    <%= link_to t(".top_call_to_action", default: "Liste des tournois"), tournaments_path, class: "navbar-wagon-item navbar-wagon-button btn" %>
+    <h6>(Départements 22, 29, 35, 56 et départements limitrophes)</h6>
+  </div>
+  <div class="banner-content">
+    <p>Réservé aux licenciés du Maure Badminton Club</p>
+  </div>
+  <div class="banner-content">
+    <%= link_to "Liste des tournois", tournaments_path, class: "navbar-wagon-item navbar-wagon-button btn" %>
+  </div>
+  <div class="banner-content">
+    <%= link_to "Comment ça fonctionne ?", "/comment-ca-fonctionne", class: "navbar-wagon-item navbar-wagon-button btn" %>
   </div>
 </div>
