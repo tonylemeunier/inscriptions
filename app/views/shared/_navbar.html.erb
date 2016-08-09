@@ -37,8 +37,9 @@
     <% else %>
 
       <!-- Login text link -->
-      <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
-
+      <%= link_to new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" do %>
+        <i class="fa fa-sign-in fa-2x" aria-hidden="true"></i>
+      <% end %>
     <% end %>
 
   </div>
