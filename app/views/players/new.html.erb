@@ -23,32 +23,4 @@
   </div>
 <% end %>
 
-<div class="container">
-  <div class="text-center">
-    <h2>Tous les joueurs</h2>
-  </div>
-  <table class="table table-striped">
-    <tr>
-      <th>Nom</th>
-      <th>Prénom</th>
-      <th>Licence</th>
-      <th>Crédit</th>
-      <th></th>
-    </tr>
-    <% @players.each do |player| %>
-      <tr>
-        <td><%= player.last_name %></td>
-        <td><%= player.first_name %></td>
-        <td><%= player.licence %></td>
-        <td><%= player.credit %></td>
-        <td>
-          <% if current_user %>
-            <%= link_to edit_player_path(player) do %>
-              <i class="fa fa-pencil" aria-hidden="true"></i>
-            <% end %>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </table>
-</div>
+<%= render 'shared/table_players' %>

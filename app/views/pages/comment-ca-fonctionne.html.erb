@@ -1,0 +1,52 @@
+<div class="container">
+
+  <div class="text-center">
+    <h2>Comment fonctionne ce site ?</h2>
+  </div>
+
+  <div>
+    <p>Ce site est là pour centraliser les inscriptions des licenciés du MBC aux tournois extérieurs. Vous trouverez donc la liste de tous les tournois, le montant des inscriptions, la liste des inscrits ... Voici comment il fonctionne !</p>
+  </div>
+
+  <div>
+    <h4>Votre crédit</h4>
+    <p>Pour pouvoir vous inscrire à un tournoi, vous devez au préalable vous assurez d'avoir un
+    crédit suffisant.</p>
+    <ul>
+      <li>
+        Rendez-vous sur la page <%= link_to "Joueurs", players_path, class: "navbar-wagon-item navbar-wagon-button btn" %>
+      </li>
+      <li>
+        Si votre crédit est insuffisant : transmettez un chèque du montant désiré à Anne-Laure GUEHENNEUC qui l'encaissera sur le compte du club et pourra ainsi créditer votre compte du montant correspondant
+      </li>
+    </ul>
+    <h4>S'inscrire</h4>
+    <ul>
+      <li>
+        Rendez-vous sur la page <%= link_to "Liste des tournois", tournaments_path, class: "navbar-wagon-item navbar-wagon-button btn" %>
+      </li>
+      <li>
+        Choisissez le tournoi désiré, cliquez sur l'icône <i class="fa fa-pencil fa-2x" aria-hidden="true"></i> et remplissez le formulaire. N'oubliez pas de cliquer sur "M'inscrire"
+      </li>
+    </ul>
+    <h4>Modifier son inscription</h4>
+    <p>Seule Anne-Laure est en mesure de modifier une inscription, que ce soit la supprimer, rajouter un tableau ou en supprimer un</p>
+    <ul>
+      <li>
+        Envoyez lui <%= mail_to "anne.laure.guehenneuc@gmail.com", "un mail" %> en notant bien le tournoi concerné et les changements associés
+      </li>
+      <li>
+        ATTENTION : si vous souhaitez rajouter un tableau, assurez-vous d'avoir assez de crédit ! Si ce n'est pas le cas, reportez-vous au point "Crédit"
+      </li>
+    </ul>
+    <h4>Liste des inscrits à un tournoi</h4>
+    <ul>
+      <li>
+        Rendez-vous sur la page <%= link_to "Liste des tournois", tournaments_path, class: "navbar-wagon-item navbar-wagon-button btn" %>
+      </li>
+      <li>
+        Choisissez le tournoi désiré et cliquez sur l'icône <i class="fa fa-list-alt fa-2x" aria-hidden="true"></i>
+      </li>
+    </ul>
+  </div>
+</div>
