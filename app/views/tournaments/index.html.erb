@@ -22,6 +22,9 @@
               <th>3 tab.</th>
               <th>S'incrire</th>
               <th>Inscrits</th>
+              <% if current_user %>
+                <th>Edit</th>
+              <% end %>
             </tr>
             <% if hash[:array].empty? %>
               <tr>
@@ -79,12 +82,17 @@
                     <% end %>
                   </td>
                   <td align="center">
-
-                  <%= link_to tournament_registrations_path(:tournament_id => tournament.id) do %>
-                    <i class="fa fa-list-alt" aria-hidden="true"></i>
-
-                  <% end %>
+                    <%= link_to tournament_registrations_path(:tournament_id => tournament.id) do %>
+                      <i class="fa fa-list-alt" aria-hidden="true"></i>
+                    <% end %>
                   </td>
+                  <% if current_user %>
+                    <td>
+                      <%= link_to edit_tournament_path(:id => tournament.id) do %>
+                        <i class="fa fa-cogs" aria-hidden="true"></i>
+                      <% end %>
+                    </td>
+                  <% end %>
                 </tr>
               <% end %>
             <% end %>
@@ -92,7 +100,6 @@
         <% end %>
       </div>
     </div>
-
   </div>
 </div>
 
