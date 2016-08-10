@@ -1,3 +1,14 @@
 .table-striped {
   margin-bottom: 0px;
 }
+
+th {
+  color: white;
+  background: $blue;
+  font-weight: normal;
+}
+
+.th-month {
+  width: 160px;
+  background: $red;
+}
