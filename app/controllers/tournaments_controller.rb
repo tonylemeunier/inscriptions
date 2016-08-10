@@ -47,6 +47,10 @@ class TournamentsController < ApplicationController
   end
 
   def edit
+    @registrations_by_tournaments = Registration.joins(:tournament).
+                                  joins(:player).
+                                  where(:tournament_id => params["id"])
+                                  # raise
   end
 
   def update

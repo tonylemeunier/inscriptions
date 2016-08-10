@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="text-center">
+    <h2>Modifier un tournoi</h2>
+  </div>
+  <div class="row">
+    <div class="row col-xs-12 col-sm-6">
+      <div class="form_new">
+        <%= simple_form_for @tournament do |i| %>
+          <%= i.input :city, label: "Ville" %>
+          <%= i.input :date, as: :date, html5: true %>
+          <%= i.input :date2, as: :date, html5: true %>
+          <%= i.input :serie %>
+          <%= i.input :tableau %>
+      </div>
+    </div>
+    <div class="row col-xs-12 col-sm-6">
+      <div class="form_new">
+          <%= i.input :price1, as: :integer, label: "Prix pour 1 tableau" %>
+          <%= i.input :price2, label: "Prix pour 2 tableaux" %>
+          <%= i.input :price3, label: "Prix pour 3 tableaux"  %>
+          <%= i.button :submit, "Modifier le tournoi" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= render "shared/list_registrations" %>
