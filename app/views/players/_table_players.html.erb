@@ -7,8 +7,10 @@
       <th>Nom</th>
       <th>Prénom</th>
       <th>Licence</th>
-      <th>Crédit</th>
-      <th></th>
+      <th>Crédit (€)</th>
+      <% if current_user %>
+        <th></th>
+      <% end %>
     </tr>
     <% @players.each do |player| %>
       <tr>
@@ -16,10 +18,10 @@
         <td><%= player.first_name %></td>
         <td><%= player.licence %></td>
         <td><%= player.credit %></td>
-        <td>
-          <% if current_user %>
+        <% if current_user %>
+          <td>
             <%= link_to edit_player_path(player) do %>
-              <i class="fa fa-pencil" aria-hidden="true"></i>
+              <i class="fa fa-cogs" aria-hidden="true"></i>
             <% end %>
           <% end %>
         </td>
