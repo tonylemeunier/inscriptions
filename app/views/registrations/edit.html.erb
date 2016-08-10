@@ -26,7 +26,7 @@
       <div class="col-xs-12 col-sm-4 col-sm-offset-2">
         <%= i.input :tableau1, label: "1er Tableau", collection: TABLEAUX %>
         <%= i.input :serie1, label: "Série" %>
-        <div id="com1" style="display:none">
+        <div id="com1">
           <%= i.input :com1, label: "Nom de votre partenaire de Double / Mixte" %>
         </div>
       </div>
@@ -34,7 +34,7 @@
         <div class="col-xs-12 col-sm-4">
           <%= i.input :tableau2, label: "2ème Tableau", collection: TABLEAUX  %>
           <%= i.input :serie2, label: "Série" %>
-          <div id="com2" style="display:none">
+          <div id="com2">
             <%= i.input :com2, label: "Nom de votre partenaire de Double / Mixte" %>
           </div>
         </div>
@@ -42,7 +42,7 @@
         <div class="col-xs-12 col-sm-4">
           <%= i.input :tableau2, as: :hidden, collection: TABLEAUX  %>
           <%= i.input :serie2, as: :hidden %>
-          <div id="com2" style="display:none">
+          <div id="com2">
             <%= i.input :com2, as: :hidden %>
           </div>
         </div>
