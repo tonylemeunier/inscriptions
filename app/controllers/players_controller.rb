@@ -3,7 +3,7 @@ class PlayersController < ApplicationController
   before_action :set_player, only: [:show, :edit, :update, :delete]
 
   def index
-    @players = Player.all
+    @players = Player.order(:last_name)
   end
 
   def show
