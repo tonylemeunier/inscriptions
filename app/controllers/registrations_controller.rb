@@ -13,7 +13,7 @@ class RegistrationsController < ApplicationController
     # Génération du fichier excel pour l'envoi des inscriptions
     respond_to do |format|
       format.html
-      format.xls # { send_data @products.to_csv(col_sep: "\t") }
+      format.xls { response.headers['Content-Disposition'] = "attachment; filename=\"#{@registrations_by_tournaments.first.tournament.city}_#{Date.today.strftime("%d-%m-%Y")}.xls\"" }
     end
   end
 
