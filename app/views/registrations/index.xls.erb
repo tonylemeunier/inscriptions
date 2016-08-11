@@ -1,0 +1,62 @@
+<table>
+  <tr>Club : Maure de Bretagne (MBC)</tr>
+  <tr>Responsable inscriptions : Anne-Laure GUEHENNEUC</tr>
+  <tr>06 24 99 25 57</tr>
+  <tr>anne.laure.guehenneuc@gmail.com</tr>
+  <tr>Inscriptions au tournoi de <%= @registrations_by_tournaments.first.tournament.city %>
+  - <%= @registrations_by_tournaments.first.tournament.date.strftime("%d / %m / %Y ") %></tr>
+  <tr>
+    <td>Nom</td>
+    <td>Prenom</td>
+    <td>Licence</td>
+    <td>Tableau</td>
+    <td>Serie</td>
+    <td>Partenaire de double ou mixte</td>
+    <td>Prix</td>
+  </tr>
+  <% @registrations_by_tournaments.each do |registration| %>
+    <tr>
+      <td><%= registration.player.last_name %></td>
+      <td><%= registration.player.first_name %></td>
+      <td><%= registration.player.licence %></td>
+      <td><%= registration.tableau1 %></td>
+      <td><%= registration.serie1 %></td>
+      <% if registration.com1 != "" || registration.com1 != nil %>
+        <td><%= registration.com1 %></td>
+      <% else %>
+        <td></td>
+      <% end %>
+      <td><%= registration.price %></td>
+    </tr>
+    <% if registration.tableau2 != "" || registration.tableau2 != nil %>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><%= registration.tableau2 %></td>
+        <td><%= registration.serie2 %></td>
+        <% if registration.com2 != "" || registration.com2 != nil %>
+          <td><%= registration.com2 %></td>
+        <% end %>
+      </tr>
+    <% end %>
+    <% if registration.tableau3 != "" || registration.tableau3 != nil %>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><%= registration.tableau3 %></td>
+        <td><%= registration.serie3 %></td>
+        <% if registration.com3 != "" || registration.com3 != nil %>
+          <td><%= registration.com3 %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  <% end %>
+  <tr></tr>
+  <tr>
+    <td>Montant total :</td>
+    <td><%= @sum %></td>
+  </tr>
+</table>
+

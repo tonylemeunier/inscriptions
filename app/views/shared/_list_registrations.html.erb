@@ -9,6 +9,9 @@
         <%= @tournament.date.strftime("%d") %> et <%= @tournament.date2.strftime("%d / %m / %Y ") %>
       <% end %>
     </h2>
+    <% if current_user %>
+      <%= link_to "Télécharger en Excel", tournament_registrations_path(format: "xls"), class: "navbar-wagon-item navbar-wagon-button btn" %>
+    <% end %>
   </div>
   <div class="row">
     <div class="col-xs-12 col-sm-6 col-sm-offset-3">
