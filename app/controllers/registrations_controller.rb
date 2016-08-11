@@ -4,6 +4,17 @@ class RegistrationsController < ApplicationController
     @registrations_by_tournaments = Registration.joins(:tournament).
                                   joins(:player).
                                   where(:tournament_id => params["tournament_id"])
+    # Somme du montant des inscriptions
+    @sum = 0
+    @registrations_by_tournaments.each do |registration|
+      @sum += registration.price
+    end
+    @sum
+    # Génération du fichier excel pour l'envoi des inscriptions
+    respond_to do |format|
+      format.html
+      format.xls { response.headers['Content-Disposition'] = "attachment; filename=\"#{@registrations_by_tournaments.first.tournament.city}_#{Date.today.strftime("%d-%m-%Y")}.xls\"" }
+    end
   end
 
   def show
