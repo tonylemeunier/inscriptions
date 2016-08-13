@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160804134205) do
+ActiveRecord::Schema.define(version: 20160813200413) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,16 @@ ActiveRecord::Schema.define(version: 20160804134205) do
     t.date     "date2"
   end
 
+  create_table "transactions", force: :cascade do |t|
+    t.integer  "amount"
+    t.string   "reason"
+    t.integer  "player_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "transactions", ["player_id"], name: "index_transactions_on_player_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -80,4 +90,5 @@ ActiveRecord::Schema.define(version: 20160804134205) do
 
   add_foreign_key "registrations", "players"
   add_foreign_key "registrations", "tournaments"
+  add_foreign_key "transactions", "players"
 end
