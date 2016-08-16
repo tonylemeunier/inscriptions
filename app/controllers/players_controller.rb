@@ -17,6 +17,11 @@ class PlayersController < ApplicationController
   def create
     @player = Player.new(player_params)
     @player.save
+    transaction = Transaction.new
+    transaction.player_id = @player.id.to_i
+    transaction.amount = @player.credit
+    transaction.reason = "(CREDIT) Enregistrement joueur"
+    transaction.save
     redirect_to new_player_path
   end
 
@@ -28,6 +33,13 @@ class PlayersController < ApplicationController
     credit_sup = params["credit_sup"].to_i
     new_credit = credit + credit_sup
     @player.update(:credit => new_credit)
+
+    transaction = Transaction.new
+    transaction.player_id = @player.id.to_i
+    transaction.amount = params["credit_sup"].to_i
+    transaction.reason = params["reason"]
+    transaction.save
+
     redirect_to new_player_path
   end
 

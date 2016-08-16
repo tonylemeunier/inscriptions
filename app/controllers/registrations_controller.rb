@@ -44,7 +44,6 @@ class RegistrationsController < ApplicationController
       @registration.price = tournament.price3
     end
 
-
     if player.credit < @registration.price
       redirect_to '/credit-insuffisant'
     else
@@ -52,7 +51,14 @@ class RegistrationsController < ApplicationController
       player.credit = new_credit
       player.save
       @registration.save
-      redirect_to tournaments_path
+
+      transaction = Transaction.new
+      transaction.player_id = @@player.id.to_i
+      transaction.amount = @registration.price
+      transaction.reason = "(DEBIT) Inscription au tournoi de #{@tournament.city}"
+      transaction.save
+
+    redirect_to tournaments_path
     end
   end
 
@@ -68,14 +74,33 @@ class RegistrationsController < ApplicationController
     @registration = Registration.find(params["id"])
     price_before = @registration.price
 
-    # Define the new price
-
     tableau2 = registration_params["tableau2"]
     serie2 = registration_params["serie2"]
     tableau3 = registration_params["tableau3"]
     serie3 = registration_params["serie3"]
 
+    # only 1 tableau
     if tableau2 == nil || tableau2 == ""
+
+      # 1 or 2 tableaux deleted
+      if price_before > @tournament.price1
+
+        # re-créditation de la différence de prix
+        minus_charge = price_before - @tournament.price1
+        new_credit = @player.credit + minus_charge
+        @player.credit = new_credit
+        @player.save
+
+        # save a transaction
+        transaction = Transaction.new
+        transaction.player_id = @player.id.to_i
+        transaction.amount = minus_charge
+        transaction.reason = "(CREDIT) Suppression de tableau(x) au tournoi de #{@tournament.city}"
+        transaction.save
+
+      end
+
+      # màj de la registration
       @registration.update(
                             "tableau1"=>registration_params["tableau1"],
                             "serie1"=>registration_params["serie1"],
@@ -87,7 +112,41 @@ class RegistrationsController < ApplicationController
                             "com2"=>registration_params["com2"],
                             "com3"=>registration_params["com3"],
                             "price" => @tournament.price1)
+
+      redirect_to tournament_registrations_path(:tournament_id => registration_params["tournament_id"].to_i)
+
+    # only 2  tableaux
     elsif tableau3 == nil || tableau3 == ""
+
+      # check if 1 tableau added ou deleted
+
+      # 1 tableau is added
+      if price_before < @tournament.price2
+        # différence de prix
+        @extra_charge = @tournament.price2 - price_before
+        # call private def
+        debit_check_and_update_credit_and_save_registration
+
+      # else a tableau is deleted
+      else
+        # différence de prix
+        minus_charge = price_before - @tournament.price2
+
+        # re-créditation de la différence de prix
+        new_credit = @player.credit + minus_charge
+        @player.credit = new_credit
+        @player.save
+
+        # save a transaction
+        transaction = Transaction.new
+        transaction.player_id = @player.id.to_i
+        transaction.amount = minus_charge
+        transaction.reason = "(CREDIT) Suppression de tableau(x) au tournoi de #{@tournament.city}"
+        transaction.save
+
+      end
+
+      # màj de la registration
       @registration.update(
                             "tableau1"=>registration_params["tableau1"],
                             "serie1"=>registration_params["serie1"],
@@ -99,7 +158,22 @@ class RegistrationsController < ApplicationController
                             "com2"=>registration_params["com2"],
                             "com3"=>registration_params["com3"],
                             "price" => @tournament.price2)
-    else
+
+      redirect_to tournament_registrations_path(:tournament_id => registration_params["tournament_id"].to_i)
+
+    else # 3 tableaux
+
+      # check if a tableau is added
+      if price_before < @tournament.price3
+
+        # différence de prix
+        @extra_charge = @tournament.price3 - price_before
+        # call private def
+        debit_check_and_update_credit_and_save_registration
+
+      end
+
+      # màj de la registration
       @registration.update(
                             "tableau1"=>registration_params["tableau1"],
                             "serie1"=>registration_params["serie1"],
@@ -111,40 +185,32 @@ class RegistrationsController < ApplicationController
                             "com2"=>registration_params["com2"],
                             "com3"=>registration_params["com3"],
                             "price" => @tournament.price3)
-    end
     # Define the new price - END
 
-    # Vérif différence prix
-    # If a tableau is added
-    if price_before < @registration.price
-      extra_charge = @registration.price - price_before
-      if @player.credit < extra_charge
-        redirect_to '/credit-insuffisant'
-      else
-        new_credit = @player.credit - extra_charge
-        @player.credit = new_credit
-        @player.save
-      end
-    # else a tableau is deleted
-    else
-      minus_charge = price_before - @registration.price
-      new_credit = @player.credit + minus_charge
-      @player.credit = new_credit
-      @player.save
-    end
-
     redirect_to tournament_registrations_path(:tournament_id => registration_params["tournament_id"].to_i)
+    end
   end
 
   def destroy
     @registration = Registration.find(params[:id])
-    # réaffecter le solde du joueur
     player = Player.find(@registration.player_id.to_i)
+    tournament = Tournament.find(@registration.tournament_id.to_i)
+
+    # réaffecter le solde du joueur
     new_credit = player.credit + @registration.price
     player.credit = new_credit
     player.save
 
+    # save a transaction
+    transaction = Transaction.new
+    transaction.player_id = player.id.to_i
+    transaction.amount = @registration.price
+    transaction.reason = "(CREDIT) Suppression de l'inscription au tournoi de #{tournament.city}"
+    transaction.save
+
     @registration.destroy
+
+
     redirect_to tournament_registrations_path(:tournament_id => params["tournament_id"].to_i)
   end
 
@@ -156,6 +222,26 @@ class RegistrationsController < ApplicationController
 
   def registration_params
     params.require(:registration).permit(:tournament_id, :player_id, :tableau1, :serie1, :tableau2, :serie2, :tableau3, :serie3, :com1, :com2, :com3)
+  end
+
+  def debit_check_and_update_credit_and_save_registration
+    if @player.credit < @extra_charge
+      redirect_to '/credit-insuffisant'
+    else
+
+      # débit de la différence de prix
+      new_credit = @player.credit - @extra_charge
+      @player.credit = new_credit
+      @player.save
+
+      # save a transaction
+      transaction = Transaction.new
+      transaction.player_id = @player.id.to_i
+      transaction.amount = @extra_charge
+      transaction.reason = "(DEBIT) Ajout de tableau(x) au tournoi de #{@tournament.city}"
+      transaction.save
+
+    end
   end
 end
 

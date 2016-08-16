@@ -1,5 +1,6 @@
 class Player < ActiveRecord::Base
   has_many :registrations
+  has_many :transactions
 
   def self.name_with_credit
     @players = self.order(:last_name).pluck(:last_name, :first_name, :credit, :id)
