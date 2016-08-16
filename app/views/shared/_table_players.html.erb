@@ -8,6 +8,7 @@
       <th>Prénom</th>
       <th>Licence</th>
       <th>Crédit</th>
+      <th>Transactions</th>
       <th></th>
     </tr>
     <% @players.each do |player| %>
@@ -16,6 +17,11 @@
         <td><%= player.first_name %></td>
         <td><%= player.licence %></td>
         <td><%= player.credit %></td>
+        <td>
+          <%= link_to player_transactions_path(:player_id => player.id) do %>
+            <i class="fa fa-exchange" aria-hidden="true"></i>
+          <% end %>
+        </td>
         <td>
           <% if current_user %>
             <%= link_to edit_player_path(player) do %>
