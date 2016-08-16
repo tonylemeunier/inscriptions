@@ -4,6 +4,7 @@ class RegistrationsController < ApplicationController
     @registrations_by_tournaments = Registration.joins(:tournament).
                                   joins(:player).
                                   where(:tournament_id => params["tournament_id"])
+
     # Somme du montant des inscriptions
     @sum = 0
     @registrations_by_tournaments.each do |registration|
@@ -28,8 +29,8 @@ class RegistrationsController < ApplicationController
 
   def create
     @registration = Registration.new(registration_params)
-    player = Player.find(registration_params["player_id"].to_i)
-    tournament = Tournament.find(registration_params["tournament_id"].to_i)
+    @player = Player.find(registration_params["player_id"].to_i)
+    @tournament = Tournament.find(registration_params["tournament_id"].to_i)
 
     tableau2 = registration_params["tableau2"]
     serie2 = registration_params["serie2"]
@@ -37,23 +38,23 @@ class RegistrationsController < ApplicationController
     serie3 = registration_params["serie3"]
 
     if tableau2 == nil || tableau2 == ""
-      @registration.price = tournament.price1
+      @registration.price = @tournament.price1
     elsif tableau3 == nil || tableau3 == ""
-      @registration.price = tournament.price2
+      @registration.price = @tournament.price2
     else
-      @registration.price = tournament.price3
+      @registration.price = @tournament.price3
     end
 
-    if player.credit < @registration.price
+    if @player.credit < @registration.price
       redirect_to '/credit-insuffisant'
     else
-      new_credit = player.credit - @registration.price
-      player.credit = new_credit
-      player.save
+      new_credit = @player.credit - @registration.price
+      @player.credit = new_credit
+      @player.save
       @registration.save
 
       transaction = Transaction.new
-      transaction.player_id = @@player.id.to_i
+      transaction.player_id = @player.id.to_i
       transaction.amount = @registration.price
       transaction.reason = "(DEBIT) Inscription au tournoi de #{@tournament.city}"
       transaction.save

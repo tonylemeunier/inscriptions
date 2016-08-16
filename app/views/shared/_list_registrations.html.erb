@@ -9,50 +9,57 @@
         <%= @tournament.date.strftime("%d") %> et <%= @tournament.date2.strftime("%d / %m / %Y ") %>
       <% end %>
     </h2>
-    <% if current_user %>
-      <%= link_to "Télécharger en Excel", tournament_registrations_path(format: "xls"), class: "navbar-wagon-item navbar-wagon-button btn" %>
-    <% end %>
+    <% if @registrations_by_tournaments.empty? %>
   </div>
-  <div class="row">
-    <div class="col-xs-12 col-sm-6 col-sm-offset-3">
-      <table class="table table-striped" >
-        <tr>
-          <th>Nom</th>
-          <th>Prénom</th>
-          <th>Tableau</th>
-          <th>Série</th>
-          <th>Modifier</th>
-          <th>Supprimer</th>
-        </tr>
-        <% @registrations_by_tournaments.each do |registration| %>
+  <div class="text-center">
+    <i class="fa fa-times" aria-hidden="true" style="color: red;"></i> Aucune inscription enregistrée
+  </div>
+    <% else %>
+      <% if current_user %>
+        <%= link_to "Télécharger en Excel", tournament_registrations_path(format: "xls"), class: "navbar-wagon-item navbar-wagon-button btn" %>
+      <% end %>
+  </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+        <table class="table table-striped" >
           <tr>
-            <td><%= registration.player.last_name %></td>
-            <td><%= registration.player.first_name %></td>
-            <td>
-              <%= registration.tableau1 %></br>
-              <%= registration.tableau2 %></br>
-              <%= registration.tableau3 %>
-            </td>
-            <td>
-              <%= registration.serie1 %></br>
-              <%= registration.serie2 %></br>
-              <%= registration.serie3 %>
-            </td>
-            <td align="center">
-              <%= link_to edit_tournament_registration_path(:tournament_id => registration.tournament_id, :id => registration.id) do %>
-                <i class="fa fa-cogs" aria-hidden="true"></i>
-              <% end %>
-            </td>
-            <td align="center">
-              <%= link_to tournament_registration_path(:tournament_id => registration.tournament_id, :id => registration.id),
-                    method: :delete, data: { confirm: 'Êtes-vous sûr de vouloir supprimer cette inscription ?' } do %>
-                <i class="fa fa-times" aria-hidden="true"></i>
-              <% end %>
-            </td>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Tableau</th>
+            <th>Série</th>
+            <th>Modifier</th>
+            <th>Supprimer</th>
           </tr>
-        <% end %>
-      </table>
+          <% @registrations_by_tournaments.each do |registration| %>
+            <tr>
+              <td><%= registration.player.last_name %></td>
+              <td><%= registration.player.first_name %></td>
+              <td>
+                <%= registration.tableau1 %></br>
+                <%= registration.tableau2 %></br>
+                <%= registration.tableau3 %>
+              </td>
+              <td>
+                <%= registration.serie1 %></br>
+                <%= registration.serie2 %></br>
+                <%= registration.serie3 %>
+              </td>
+              <td align="center">
+                <%= link_to edit_tournament_registration_path(:tournament_id => registration.tournament_id, :id => registration.id) do %>
+                  <i class="fa fa-cogs" aria-hidden="true"></i>
+                <% end %>
+              </td>
+              <td align="center">
+                <%= link_to tournament_registration_path(:tournament_id => registration.tournament_id, :id => registration.id),
+                      method: :delete, data: { confirm: 'Êtes-vous sûr de vouloir supprimer cette inscription ?' } do %>
+                  <i class="fa fa-times" aria-hidden="true"></i>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
     </div>
-  </div>
+  <% end %>
 </div>
 
