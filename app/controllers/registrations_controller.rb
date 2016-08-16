@@ -193,13 +193,24 @@ class RegistrationsController < ApplicationController
 
   def destroy
     @registration = Registration.find(params[:id])
-    # réaffecter le solde du joueur
     player = Player.find(@registration.player_id.to_i)
+    tournament = Tournament.find(@registration.tournament_id.to_i)
+
+    # réaffecter le solde du joueur
     new_credit = player.credit + @registration.price
     player.credit = new_credit
     player.save
 
+    # save a transaction
+    transaction = Transaction.new
+    transaction.player_id = player.id.to_i
+    transaction.amount = @registration.price
+    transaction.reason = "(CREDIT) Suppression de l'inscription au tournoi de #{tournament.city}"
+    transaction.save
+
     @registration.destroy
+
+
     redirect_to tournament_registrations_path(:tournament_id => params["tournament_id"].to_i)
   end
 
