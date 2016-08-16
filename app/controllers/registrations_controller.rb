@@ -52,6 +52,13 @@ class RegistrationsController < ApplicationController
       player.credit = new_credit
       player.save
       @registration.save
+
+      transaction = Transaction.new
+      transaction.player_id = player.id.to_i
+      transaction.amount = @registration.price
+      transaction.reason = "Inscription au tournoi de #{tournament.city}"
+      transaction.save
+
       redirect_to tournaments_path
     end
   end
