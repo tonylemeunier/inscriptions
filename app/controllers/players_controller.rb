@@ -17,6 +17,11 @@ class PlayersController < ApplicationController
   def create
     @player = Player.new(player_params)
     @player.save
+    transaction = Transaction.new
+    transaction.player_id = @player.id.to_i
+    transaction.amount = @player.credit
+    transaction.reason = "Enregistrement joueur"
+    transaction.save
     redirect_to new_player_path
   end
 
