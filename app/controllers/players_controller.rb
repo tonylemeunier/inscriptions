@@ -20,7 +20,7 @@ class PlayersController < ApplicationController
     transaction = Transaction.new
     transaction.player_id = @player.id.to_i
     transaction.amount = @player.credit
-    transaction.reason = "Enregistrement joueur"
+    transaction.reason = "(CREDIT) Enregistrement joueur"
     transaction.save
     redirect_to new_player_path
   end
