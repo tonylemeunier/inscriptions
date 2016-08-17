@@ -3,8 +3,8 @@
     <div class="form_new">
       <%= simple_form_for @tournament do |i| %>
         <%= i.input :city, label: "Ville" %>
-        <%= i.input :date, as: :date, html5: true %>
-        <%= i.input :date2, as: :date, html5: true %>
+        <%= i.input :date, as: :date, html5: true, :label => "Jour 1 (jj/mm/aaaa)" %>
+        <%= i.input :date2, as: :date, html5: true, :label => "Jour 2 (jj/mm/aaaa)" %>
         <%= i.input :serie %>
         <%= i.input :tableau %>
     </div>
@@ -19,3 +19,5 @@
     </div>
   </div>
 </div>
+
+
