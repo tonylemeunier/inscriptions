@@ -125,6 +125,7 @@ class RegistrationsController < ApplicationController
       if price_before < @tournament.price2
         # différence de prix
         @extra_charge = @tournament.price2 - price_before
+
         # call private def
         debit_check_and_update_credit_and_save_registration
 
@@ -145,6 +146,7 @@ class RegistrationsController < ApplicationController
         transaction.reason = "(CREDIT) Suppression de tableau(x) au tournoi de #{@tournament.city}"
         transaction.save
 
+        redirect_to tournament_registrations_path(:tournament_id => registration_params["tournament_id"].to_i)
       end
 
       # màj de la registration
@@ -159,8 +161,6 @@ class RegistrationsController < ApplicationController
                             "com2"=>registration_params["com2"],
                             "com3"=>registration_params["com3"],
                             "price" => @tournament.price2)
-
-      redirect_to tournament_registrations_path(:tournament_id => registration_params["tournament_id"].to_i)
 
     else # 3 tableaux
 
@@ -188,7 +188,6 @@ class RegistrationsController < ApplicationController
                             "price" => @tournament.price3)
     # Define the new price - END
 
-    redirect_to tournament_registrations_path(:tournament_id => registration_params["tournament_id"].to_i)
     end
   end
 
@@ -241,6 +240,9 @@ class RegistrationsController < ApplicationController
       transaction.amount = @extra_charge
       transaction.reason = "(DEBIT) Ajout de tableau(x) au tournoi de #{@tournament.city}"
       transaction.save
+
+      redirect_to tournament_registrations_path(:tournament_id => registration_params["tournament_id"].to_i)
+
 
     end
   end
