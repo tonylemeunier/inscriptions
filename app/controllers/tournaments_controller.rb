@@ -47,15 +47,20 @@ class TournamentsController < ApplicationController
   end
 
   def edit
-    @registrations_by_tournaments = Registration.joins(:tournament).
-                                  joins(:player).
-                                  where(:tournament_id => params["id"])
-                                  # raise
+
   end
 
   def update
-    @tournament.update(tournament_params)
-    redirect_to tournament_path(@tournament)
+    @registrations_by_tournaments = Registration.joins(:tournament).
+                                  joins(:player).
+                                  where(:tournament_id => params["id"])
+
+    @tournament.update(
+                        "price1" => params["price1"].to_i,
+                        "price2" => params["price2"].to_i,
+                        "price3" => params["price3"].to_i
+                        )
+    redirect_to tournaments_path
   end
 
   def delete
