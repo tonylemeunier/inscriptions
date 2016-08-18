@@ -23,7 +23,7 @@
               <th>S'incrire</th>
               <th>Inscrits</th>
               <% if current_user %>
-                <th>Edit</th>
+                <th>Tournoi club ?</th>
               <% end %>
             </tr>
             <% if hash[:array].empty? %>
@@ -87,9 +87,9 @@
                     <% end %>
                   </td>
                   <% if current_user %>
-                    <td>
-                      <%= link_to edit_tournament_path(:id => tournament.id) do %>
-                        <i class="fa fa-cogs" aria-hidden="true"></i>
+                    <td align="center">
+                      <%= link_to tournament_path(:id => tournament.id, :price1 => 0, :price2 => 0, :price3 => 0), method: :patch do %>
+                        <i class="fa fa-check-square-o" aria-hidden="true"></i>
                       <% end %>
                     </td>
                   <% end %>
