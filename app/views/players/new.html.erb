@@ -14,7 +14,7 @@
       <div class="row col-xs-12 col-sm-6">
         <div class="form_new">
             <%= i.input :licence %>
-            <%= i.input :credit, as: :integer %>
+            <%= i.input :credit, as: :integer, input_html: {value: i.object.credit || 0} %>
             <%= i.button :submit, "Ajouter le joueur" %>
           <% end %>
         </div>
