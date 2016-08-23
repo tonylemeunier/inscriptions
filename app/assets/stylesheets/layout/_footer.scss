@@ -1,1 +1,30 @@
+
 // Your footer style
+
+.footer {
+  /*font-size: 22px;*/
+  padding: 20px 0;
+  background-color: $blue-lighter;
+  color: grey;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  // border-top: 1px solid $background-grey;
+
+  a {
+    color: grey;
+    font-size: 15px;
+    padding: 20px;
+  }
+
+  a:hover {
+    color: $blue;
+    text-decoration: none;
+  }
+
+  p {
+    margin: 0;
+    padding-right: 40px;
+  }
+}
