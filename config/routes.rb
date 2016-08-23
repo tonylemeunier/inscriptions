@@ -2,8 +2,8 @@ Rails.application.routes.draw do
 
   devise_for :users
   root to: 'pages#home'
-  get '/credit-insuffisant' => 'pages#credit-insuffisant'
-  get '/comment-ca-fonctionne' => 'pages#comment-ca-fonctionne'
+  get '/credit_insuffisant' => 'pages#credit_insuffisant'
+  get '/comment_ca_fonctionne' => 'pages#comment_ca_fonctionne'
   resources :players do
     resources :transactions
   end
