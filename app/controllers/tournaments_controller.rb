@@ -26,7 +26,7 @@ class TournamentsController < ApplicationController
     @july = { name: "Juillet 2017", array: @tournaments_july}
     @tournaments = [@september, @october, @november, @december, @january, @february, @march, @april, @may, @june, @july]
 
-                                # raise
+
   end
 
   def show
