@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="share-links">
+    <a href="/comment_ca_fonctionne" class="share-link bg-color">
+      Comment ça fonctionne ?
+    </a>
+    <%= link_to "Liste des tournois", tournaments_path, class: "share-link bg-color" %>
+    <%= link_to "Joueurs", players_path, class: "share-link bg-color" %>
+    <%= mail_to "anne.laure.guehenneuc@gmail.com", class: "share-link bg-color" do %>
+      Anne-Laure <i class="fa fa-envelope-o"></i>
+    <% end %>
+  </div>
+</div>
