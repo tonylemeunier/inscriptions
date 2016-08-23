@@ -1,4 +1,6 @@
 class RegistrationsController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index, :new, :create]
+
   def index
     @tournament = Tournament.find(params["tournament_id"])
     @registrations_by_tournaments = Registration.joins(:tournament).
@@ -46,7 +48,7 @@ class RegistrationsController < ApplicationController
     end
 
     if @player.credit < @registration.price
-      redirect_to '/credit-insuffisant'
+      redirect_to '/credit_insuffisant'
     else
       new_credit = @player.credit - @registration.price
       @player.credit = new_credit
@@ -226,7 +228,7 @@ class RegistrationsController < ApplicationController
 
   def debit_check_and_update_credit_and_save_registration
     if @player.credit < @extra_charge
-      redirect_to '/credit-insuffisant'
+      redirect_to '/credit_insuffisant'
     else
 
       # débit de la différence de prix
