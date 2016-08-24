@@ -1,6 +1,15 @@
 <div class="container container-principal">
   <div class="container">
-    Votre crédit est actuellement insuffisant pour vous inscrire.
-    Merci de vous rapprocher d'Anne-Laure GUEHENNEUC afin de régler la situation
+    <div class="text-center" style="margin-top: 40px;">
+      <i class="fa fa-frown-o fa-4x" aria-hidden="true" style="color: red;"></i>
+      <h3>
+        Votre crédit est actuellement insuffisant pour vous inscrire.
+        </br>
+        Merci de vous rapprocher d'Anne-Laure GUEHENNEUC (
+        <%= mail_to "anne.laure.guehenneuc@gmail.com" do %>
+          <i class="fa fa-envelope-o"></i>
+        <% end %>) afin de régler la situation
+      </h3>
+    </div>
   </div>
 </div>
