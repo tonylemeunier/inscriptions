@@ -1,26 +1,28 @@
-<% if current_user %>
-  <div class="container">
-    <div class="text-center">
-      <h2>Ajouter un joueur</h2>
-    </div>
-    <div class="row">
-      <div class="row col-xs-12 col-sm-6">
-        <div class="form_new">
-          <%= simple_form_for @player do |i| %>
-            <%= i.input :first_name, label: "Prénom" %>
-            <%= i.input :last_name, label: "Nom" %>
+<div class="container container-principal">
+  <% if current_user %>
+    <div class="container">
+      <div class="text-center">
+        <h2>Ajouter un joueur</h2>
+      </div>
+      <div class="row">
+        <div class="row col-xs-12 col-sm-6">
+          <div class="form_new">
+            <%= simple_form_for @player do |i| %>
+              <%= i.input :first_name, label: "Prénom" %>
+              <%= i.input :last_name, label: "Nom" %>
+          </div>
+        </div>
+        <div class="row col-xs-12 col-sm-6">
+          <div class="form_new">
+              <%= i.input :licence %>
+              <%= i.input :credit, as: :integer, input_html: {value: i.object.credit || 0} %>
+              <%= i.button :submit, "Ajouter le joueur" %>
+            <% end %>
+          </div>
         </div>
       </div>
-      <div class="row col-xs-12 col-sm-6">
-        <div class="form_new">
-            <%= i.input :licence %>
-            <%= i.input :credit, as: :integer, input_html: {value: i.object.credit || 0} %>
-            <%= i.button :submit, "Ajouter le joueur" %>
-          <% end %>
-        </div>
-      </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
 
-<%= render 'shared/table_players' %>
+  <%= render 'shared/table_players' %>
+</div>

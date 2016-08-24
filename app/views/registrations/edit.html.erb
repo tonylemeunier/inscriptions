@@ -1,74 +1,76 @@
-<div class="container text-center">
-  <h2>
-    Modifier l'inscription au tournoi de <%= @tournament.city %>
-    </br>
-    <% if @tournament.date2 == nil %>
-      <%= @tournament.date.strftime("%d / %m / %Y ") %>
-    <% else %>
-      <%= @tournament.date.strftime("%d") %> et <%= @tournament.date2.strftime("%d / %m / %Y ") %>
-    <% end %>
-    </br>
-    </br>
-    de <%= @player.last_name %> <%= @player.first_name %>
-  </h2>
-</div>
+<div class="container container-principal">
+  <div class="container text-center">
+    <h2>
+      Modifier l'inscription au tournoi de <%= @tournament.city %>
+      </br>
+      <% if @tournament.date2 == nil %>
+        <%= @tournament.date.strftime("%d / %m / %Y ") %>
+      <% else %>
+        <%= @tournament.date.strftime("%d") %> et <%= @tournament.date2.strftime("%d / %m / %Y ") %>
+      <% end %>
+      </br>
+      </br>
+      de <%= @player.last_name %> <%= @player.first_name %>
+    </h2>
+  </div>
 
-<div class="container">
-  <%= simple_form_for [@tournament, @registration] do |i| %>
-    <div class="row">
-      <div class="col-xs-12 col-sm-6 col-sm-offset-3">
-        <%= i.input :tournament_id, as: :hidden, input_html: {value: @tournament.id} %>
-        <%= i.input :player_id, as: :hidden, collection: @all_players %>
-        <%= i.input :price, as: :hidden %>
-      </div>
-    </div>
-    <div class="row"></div>
-      <div class="col-xs-12 col-sm-4 col-sm-offset-2">
-        <%= i.input :tableau1, label: "1er Tableau", collection: TABLEAUX %>
-        <%= i.input :serie1, label: "Série" %>
-        <div id="com1">
-          <%= i.input :com1, label: "Nom de votre partenaire de Double / Mixte" %>
+  <div class="container">
+    <%= simple_form_for [@tournament, @registration] do |i| %>
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+          <%= i.input :tournament_id, as: :hidden, input_html: {value: @tournament.id} %>
+          <%= i.input :player_id, as: :hidden, collection: @all_players %>
+          <%= i.input :price, as: :hidden %>
         </div>
       </div>
-      <% if @tournament.price2 != nil %>
-        <div class="col-xs-12 col-sm-4">
-          <%= i.input :tableau2, label: "2ème Tableau", collection: TABLEAUX  %>
-          <%= i.input :serie2, label: "Série" %>
-          <div id="com2">
-            <%= i.input :com2, label: "Nom de votre partenaire de Double / Mixte" %>
+      <div class="row">
+        <div class="col-xs-12 col-sm-4 col-sm-offset-2">
+          <%= i.input :tableau1, label: "1er Tableau", collection: TABLEAUX %>
+          <%= i.input :serie1, label: "Série" %>
+          <div id="com1">
+            <%= i.input :com1, label: "Nom de votre partenaire de Double / Mixte" %>
           </div>
         </div>
-      <% else %>
-        <div class="col-xs-12 col-sm-4">
-          <%= i.input :tableau2, as: :hidden, collection: TABLEAUX  %>
-          <%= i.input :serie2, as: :hidden %>
-          <div id="com2">
-            <%= i.input :com2, as: :hidden %>
+        <% if @tournament.price2 != nil %>
+          <div class="col-xs-12 col-sm-4">
+            <%= i.input :tableau2, label: "2ème Tableau", collection: TABLEAUX  %>
+            <%= i.input :serie2, label: "Série" %>
+            <div id="com2">
+              <%= i.input :com2, label: "Nom de votre partenaire de Double / Mixte" %>
+            </div>
           </div>
-        </div>
-      <% end %>
-    </div>
-    <div class="row">
-      <% if @tournament.price3 != nil %>
-        <div class="col-xs-12 col-sm-4 col-sm-offset-4">
-          <%= i.input :tableau3, label: "3ème Tableau", collection: TABLEAUX  %>
-          <%= i.input :serie3, label: "Série" %>
-          <div id="com3" style="display:none">
-            <%= i.input :com3, label: "Nom de votre partenaire de Double / Mixte" %>
+        <% else %>
+          <div class="col-xs-12 col-sm-4">
+            <%= i.input :tableau2, as: :hidden, collection: TABLEAUX  %>
+            <%= i.input :serie2, as: :hidden %>
+            <div id="com2">
+              <%= i.input :com2, as: :hidden %>
+            </div>
           </div>
-        </div>
-      <% else %>
-        <div class="col-xs-12 col-sm-4">
-          <%= i.input :tableau3, as: :hidden, collection: TABLEAUX  %>
-          <%= i.input :serie3, as: :hidden %>
-          <div id="com3" style="display:none">
-            <%= i.input :com3, as: :hidden %>
+        <% end %>
+      </div>
+      <div class="row">
+        <% if @tournament.price3 != nil %>
+          <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+            <%= i.input :tableau3, label: "3ème Tableau", collection: TABLEAUX  %>
+            <%= i.input :serie3, label: "Série" %>
+            <div id="com3" style="display:none">
+              <%= i.input :com3, label: "Nom de votre partenaire de Double / Mixte" %>
+            </div>
           </div>
-        </div>
-      <% end %>
-    </div>
-    <div class="row text-center">
-      <%= i.button :submit, "M'inscrire" %>
-    </div>
-  <% end %>
+        <% else %>
+          <div class="col-xs-12 col-sm-4">
+            <%= i.input :tableau3, as: :hidden, collection: TABLEAUX  %>
+            <%= i.input :serie3, as: :hidden %>
+            <div id="com3" style="display:none">
+              <%= i.input :com3, as: :hidden %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="row text-center">
+        <%= i.button :submit, "Modifier l'inscription" %>
+      </div>
+    <% end %>
+  </div>
 </div>

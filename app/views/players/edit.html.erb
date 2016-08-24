@@ -1,24 +1,26 @@
-<div class="container">
-  <div class="text-center">
-    <h2>Modifier le crédit d'un joueur</h2>
-  </div>
-  <div class="row">
-    <div class="row col-xs-12 col-sm-6 col-sm-offset-3">
-      <div class="form_new">
-        <p><%= @player.first_name %> <%= @player.last_name %> : <%= @player.credit %> €</p>
-        <%= form_tag(player_path, method: :patch) do %>
-          <div>
-            Montant ajouté
-            <%= text_field_tag :credit_sup %>
-          </div>
-          <div>
-            Motif
-            <%= select_tag :reason, "<option>Versement</option><option>Contrat joueur N3</option><option>Credit joueur NC / P</option>".html_safe %>
-          </div>
-          <div>
-            <%= submit_tag 'Ajouter', class: "btn btn-primary" %>
-          </div>
-        <% end %>
+<div class="container container-principal">
+  <div class="container">
+    <div class="text-center">
+      <h2>Modifier le crédit d'un joueur</h2>
+    </div>
+    <div class="row">
+      <div class="row col-xs-12 col-sm-6 col-sm-offset-3">
+        <div class="form_new">
+          <p><%= @player.first_name %> <%= @player.last_name %> : <%= @player.credit %> €</p>
+          <%= form_tag(player_path, method: :patch) do %>
+            <div>
+              Montant ajouté
+              <%= text_field_tag :credit_sup %>
+            </div>
+            <div>
+              Motif
+              <%= select_tag :reason, "<option>Versement</option><option>Contrat joueur N3</option><option>Credit joueur NC / P</option>".html_safe %>
+            </div>
+            <div>
+              <%= submit_tag 'Ajouter', class: "btn btn-primary" %>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>

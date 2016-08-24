@@ -1,92 +1,94 @@
-<div class="container">
-  <div class="fonctionne-content">
-    <div class="fonctionne-fontawesome">
-      <i class="fa fa-question-circle fa-5x fonctionne-fa-left" aria-hidden="true"></i>
-    </div>
-    <div class="fonction-description">
-      <h3>Pourquoi ce site ?</h3>
+<div class="container container-principal">
+  <div class="container">
+    <div class="fonctionne-content">
+      <div class="fonctionne-fontawesome">
+        <i class="fa fa-question-circle fa-5x fonctionne-fa-left" aria-hidden="true"></i>
+      </div>
+      <div class="fonction-description">
+        <h3>Pourquoi ce site ?</h3>
 
-      <p>Ce site est là pour centraliser les inscriptions des licenciés du MBC aux tournois extérieurs. Vous trouverez donc la liste de tous les tournois, le montant des inscriptions, la liste des inscrits ... Tout licencié qui souhaite s'inscrire à un tournoi devra passer par ce site.
-      Voici comment il fonctionne !</p>
+        <p>Ce site est là pour centraliser les inscriptions des licenciés du MBC aux tournois extérieurs. Vous trouverez donc la liste de tous les tournois, le montant des inscriptions, la liste des inscrits ... Tout licencié qui souhaite s'inscrire à un tournoi devra passer par ce site.
+        Voici comment il fonctionne !</p>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="container">
-  <div class="fonctionne-content">
-    <div class="fonctionne-fontawesome">
-      <i class="fa fa-eur fa-5x fonctionne-fa-left" aria-hidden="true"></i>
-    </div>
-    <div class="fonction-description">
-      <h3>Votre crédit</h3>
-      <p>Pour pouvoir vous inscrire à un tournoi, vous devez au préalable vous assurez d'avoir un
-      crédit suffisant.</p>
-      <ul>
-        <li>
-          Rendez-vous sur la page <%= link_to "Joueurs", players_path, class: "navbar-wagon-item navbar-wagon-button btn fonctionne-btn" %>
-        </li>
-        <li>
-          Si votre crédit est insuffisant : transmettez un chèque du montant désiré à Anne-Laure GUEHENNEUC qui l'encaissera sur le compte du club et pourra ainsi créditer votre compte du montant correspondant
-        </li>
-      </ul>
+  <div class="container">
+    <div class="fonctionne-content">
+      <div class="fonctionne-fontawesome">
+        <i class="fa fa-eur fa-5x fonctionne-fa-left" aria-hidden="true"></i>
+      </div>
+      <div class="fonction-description">
+        <h3>Votre crédit</h3>
+        <p>Pour pouvoir vous inscrire à un tournoi, vous devez au préalable vous assurez d'avoir un
+        crédit suffisant.</p>
+        <ul>
+          <li>
+            Rendez-vous sur la page <%= link_to "Joueurs", players_path, class: "navbar-wagon-item navbar-wagon-button btn fonctionne-btn" %>
+          </li>
+          <li>
+            Si votre crédit est insuffisant : transmettez un chèque du montant désiré à Anne-Laure GUEHENNEUC qui l'encaissera sur le compte du club et pourra ainsi créditer votre compte du montant correspondant
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="container">
-  <div class="fonctionne-content">
-    <div class="fonctionne-fontawesome">
-      <i class="fa fa-pencil fa-5x fonctionne-fa-left" aria-hidden="true"></i>
-    </div>
-    <div class="fonction-description">
-      <h3>S'inscrire</h3>
-      <ul>
-        <li>
-          Rendez-vous sur la page <%= link_to "Liste des tournois", tournaments_path, class: "navbar-wagon-item navbar-wagon-button btn fonctionne-btn" %>
-        </li>
-        <li>
-          Choisissez le tournoi désiré, cliquez sur l'icône <i class="fa fa-pencil fa-2x" aria-hidden="true"></i> et remplissez le formulaire. N'oubliez pas de cliquer sur "M'inscrire"
-        </li>
-      </ul>
+  <div class="container">
+    <div class="fonctionne-content">
+      <div class="fonctionne-fontawesome">
+        <i class="fa fa-pencil fa-5x fonctionne-fa-left" aria-hidden="true"></i>
+      </div>
+      <div class="fonction-description">
+        <h3>S'inscrire</h3>
+        <ul>
+          <li>
+            Rendez-vous sur la page <%= link_to "Liste des tournois", tournaments_path, class: "navbar-wagon-item navbar-wagon-button btn fonctionne-btn" %>
+          </li>
+          <li>
+            Choisissez le tournoi désiré, cliquez sur l'icône <i class="fa fa-pencil fa-2x" aria-hidden="true"></i> et remplissez le formulaire. N'oubliez pas de cliquer sur "M'inscrire"
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="container">
-  <div class="fonctionne-content">
-    <div class="fonctionne-fontawesome">
-      <i class="fa fa-cogs fa-5x fonctionne-fa-left" aria-hidden="true"></i>
-    </div>
-    <div class="fonction-description">
-      <h3>Modifier son inscription</h3>
-      <p>Seule Anne-Laure est en mesure de modifier une inscription, que ce soit la supprimer, rajouter un tableau ou en supprimer un, changer un partenaire de double / mixte.</p>
-      <ul>
-        <li>
-          Envoyez lui <strong><%= mail_to "anne.laure.guehenneuc@gmail.com", "un mail" %></strong> en notant bien le tournoi concerné et les changements associés
-        </li>
-        <li>
-          ATTENTION : si vous souhaitez rajouter un tableau, assurez-vous d'avoir assez de crédit avant d'envoyer un mail à Anne-Laure ! Si ce n'est pas le cas, reportez-vous au point "Crédit"
-        </li>
-      </ul>
+  <div class="container">
+    <div class="fonctionne-content">
+      <div class="fonctionne-fontawesome">
+        <i class="fa fa-cogs fa-5x fonctionne-fa-left" aria-hidden="true"></i>
+      </div>
+      <div class="fonction-description">
+        <h3>Modifier son inscription</h3>
+        <p>Seule Anne-Laure est en mesure de modifier une inscription, que ce soit la supprimer, rajouter un tableau ou en supprimer un, changer un partenaire de double / mixte.</p>
+        <ul>
+          <li>
+            Envoyez lui <strong><%= mail_to "anne.laure.guehenneuc@gmail.com", "un mail" %></strong> en notant bien le tournoi concerné et les changements associés
+          </li>
+          <li>
+            ATTENTION : si vous souhaitez rajouter un tableau, assurez-vous d'avoir assez de crédit avant d'envoyer un mail à Anne-Laure ! Si ce n'est pas le cas, reportez-vous au point "Crédit"
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="container">
-  <div class="fonctionne-content">
-    <div class="fonctionne-fontawesome">
-      <i class="fa fa-list-alt fa-5x fonctionne-fa-left" aria-hidden="true"></i>
-    </div>
-    <div class="fonction-description">
-      <h3>Liste des inscrits à un tournoi</h3>
-      <ul>
-        <li>
-          Rendez-vous sur la page <%= link_to "Liste des tournois", tournaments_path, class: "navbar-wagon-item navbar-wagon-button btn fonctionne-btn" %>
-        </li>
-        <li>
-          Choisissez le tournoi désiré et cliquez sur l'icône <i class="fa fa-list-alt fa-2x" aria-hidden="true"></i>
-        </li>
-      </ul>
+  <div class="container">
+    <div class="fonctionne-content">
+      <div class="fonctionne-fontawesome">
+        <i class="fa fa-list-alt fa-5x fonctionne-fa-left" aria-hidden="true"></i>
+      </div>
+      <div class="fonction-description">
+        <h3>Liste des inscrits à un tournoi</h3>
+        <ul>
+          <li>
+            Rendez-vous sur la page <%= link_to "Liste des tournois", tournaments_path, class: "navbar-wagon-item navbar-wagon-button btn fonctionne-btn" %>
+          </li>
+          <li>
+            Choisissez le tournoi désiré et cliquez sur l'icône <i class="fa fa-list-alt fa-2x" aria-hidden="true"></i>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
