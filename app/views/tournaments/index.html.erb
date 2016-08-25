@@ -22,6 +22,7 @@
                 <th>2 tab.</th>
                 <th>3 tab.</th>
                 <th>S'incrire</th>
+                <th>Date limite inscr.</th>
                 <th>Inscrits</th>
                 <% if current_user %>
                   <th>Tournoi club ?</th>
@@ -82,6 +83,7 @@
                         <i class="fa fa-pencil" aria-hidden="true"></i>
                       <% end %>
                     </td>
+                    <td><%= tournament.deadline.strftime("%d/%m/%Y") %></td>
                     <td align="center">
                       <%= link_to tournament_registrations_path(:tournament_id => tournament.id) do %>
                         <i class="fa fa-list-alt" aria-hidden="true"></i>

@@ -11,6 +11,7 @@
   </div>
   <div class="row col-xs-12 col-sm-6">
     <div class="form_new">
+        <%= i.input :deadline, as: :date, html5: true, label: "Date limite d'inscription (jj/mm/aaaa)" %>
         <%= i.input :price1, as: :integer, label: "Prix pour 1 tableau" %>
         <%= i.input :price2, label: "Prix pour 2 tableaux" %>
         <%= i.input :price3, label: "Prix pour 3 tableaux"  %>
