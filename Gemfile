@@ -18,6 +18,9 @@ gem 'bootstrap-sass'
 gem 'font-awesome-sass'
 gem 'simple_form'
 gem 'autoprefixer-rails'
+gem 'railties', '~> 4.2.6'
+gem 'activemodel', '~> 4.2.6'
+gem 'activesupport', '~> 4.2.6'
 
 
 
@@ -48,7 +51,5 @@ group :developpement do
   gem 'capistrano-rails', '~> 1.1', '>= 1.1.7'
   gem 'capistrano-bundler', '~> 1.1', '>= 1.1.4'
   gem 'capistrano-rbenv', '~> 2.0', '>= 2.0.4'
-  gem 'railties', '~> 4.2.6'
-  gem 'activemodel', '~> 4.2.6'
-  gem 'activesupport', '~> 4.2.6'
+
 end
