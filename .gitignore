@@ -5,3 +5,6 @@ tmp/*
 *.swp
 .DS_Store
 public/assets
+
+config/database.yml
+config/secrets.tml
