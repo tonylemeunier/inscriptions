@@ -1,5 +1,4 @@
 # config valid only for current version of Capistrano
-require 'bundler/capistrno'
 lock '3.6.1'
 
 set :application, 'inscriptions'
@@ -42,6 +41,12 @@ namespace :deploy do
     on roles(:app), in: :sequence, wait: 5 do
       execute :touch, release_path.join('tmp/restart.txt')
     end
+  end
+
+  task :pipeline_precompile do
+    run "cd #{release_path}; RAILS_ENV=#{rails_env} bundle exec rake assets:pipeline_precompile"
+    run_locally("RAILS_NEW=#{rails_env} rake assets:clean && RAILS_ENV=#{rails_env} rake asstes_precompile")
+    top.upload "public/assets", "#{release_path}/publid/assets", :via =>:scp, :recursive => true
   end
 
   after :publishing, 'deploy:restart'
