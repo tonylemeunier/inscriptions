@@ -1,4 +1,5 @@
 # config valid only for current version of Capistrano
+require 'bundler/capistrno'
 lock '3.6.1'
 
 set :application, 'inscriptions'
